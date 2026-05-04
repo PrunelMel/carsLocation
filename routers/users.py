@@ -37,6 +37,7 @@ def create_user(request : schemas.UtilisateurCreate,db : Session = Depends(get_d
         nom = request.nom,
         prenom = request.prenom,
         mot_de_passe = hash_password(request.mot_de_passe),
+        email = request.email,
         role = request.role,
         id_admin = request.id_admin
     )

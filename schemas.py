@@ -34,6 +34,16 @@ class StatusVehiculeEnum(str, Enum):
 
 
 # UTILISATEUR 
+
+class ClientLogin(BaseModel):
+    email:str
+    mot_de_passe:str
+    
+class UserLogin(BaseModel):
+    email:str
+    mot_de_passe:str
+    role:RoleEnum
+    
 class ShowAdmin(BaseModel):
     id_user : str
     nom : str
@@ -46,6 +56,7 @@ class UtilisateurCreate(BaseModel):
     nom: str = Field(..., max_length=100)
     prenom: str = Field(..., max_length=100)
     mot_de_passe: str
+    email:str = Field(..., max_length=100, unique=True, pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",)
     role: RoleEnum
     id_admin: Optional[str] = Field(None, max_length=50)
     
@@ -56,6 +67,7 @@ class ShowUtilisateur(BaseModel):
     nom: str 
     prenom: str
     role: RoleEnum
+    email:str
     admin : Optional[ShowAdmin]
 
 # La classe config est necessaire dans les responses model pour eviter les erreurs
@@ -70,6 +82,7 @@ class ClientCreate(BaseModel):
     prenom: str = Field(..., max_length=100)
     mot_de_passe: str
     adresse: str
+    email:str = Field(..., max_length=100, unique=True, pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",)
     tel: str = Field(..., max_length=20)
     cin: str = Field(..., max_length=20)
     num_permis: str = Field(..., max_length=50)
@@ -82,7 +95,7 @@ class ShowClient(BaseModel):
     tel : str
     cin : str
     num_permis : str
-
+    email:str
     model_config = ConfigDict(from_attributes=True)
 
     
@@ -96,8 +109,7 @@ class Vehicule(BaseModel):
     carburant: str = Field(..., max_length=30)
     prix_par_jour: float = Field(..., gt=0)
     status: str | Optional[StatusVehiculeEnum] = "disponible"
-
-   
+    # img:str 
 
 
 class ShowVehicule(BaseModel):

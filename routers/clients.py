@@ -8,11 +8,6 @@ from typing import List
 from hashing import hash_password
 
 
-
-
-
-
-
 router = APIRouter(prefix="/api/clients",tags=["clients"])
 
 
@@ -42,6 +37,7 @@ def create_client(request : schemas.ClientCreate, db : Session = Depends(get_db)
         prenom = request.prenom,
         adresse = request.adresse,
         tel = request.tel,
+        email = request.email,
         cin = request.cin ,
         num_permis = request.num_permis
     )
@@ -73,7 +69,7 @@ def update_client(id_client: str, request: schemas.ClientCreate, db: Session = D
         )
 
     # 2. Mettre à jour les champs (en excluant l'ID pour ne pas modifier la clé primaire)
-    update_data = request.model_dump(exclude={"id_client"})
+    update_data = request.model_dump(exclude={"id_client"}) 
     for key, value in update_data.items():
         setattr(db_client, key, value)
 

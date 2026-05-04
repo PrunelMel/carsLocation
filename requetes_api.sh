@@ -3,7 +3,7 @@
 # Script pour peupler la base de données de l'agence de location de voiture
 # À exécuter avec : bash requetes_api.sh
 
-BASE_URL="http://localhost:3000/api"
+BASE_URL="http://localhost:8000/api"
 
 echo "================================================"
 echo "   CRÉATION DES DONNÉES DE L'AGENCE"
@@ -22,6 +22,7 @@ curl -X POST "$BASE_URL/users/" \
     "prenom": "Mohammed",
     "mot_de_passe": "Admin@2024!",
     "role": "admin",
+    "email": "G2A0j@example.com",
     "id_admin": null
   }'
 
@@ -35,6 +36,7 @@ curl -X POST "$BASE_URL/users/" \
     "prenom": "Fatima",
     "mot_de_passe": "SecureAdmin123",
     "role": "admin",
+    "email": "LJHtH@example.com",
     "id_admin": null
   }'
 
@@ -53,6 +55,7 @@ curl -X POST "$BASE_URL/users/" \
     "prenom": "Youssef",
     "mot_de_passe": "Agent@Pass1",
     "role": "agent",
+    "email": "HrBt9@example.com",
     "id_admin": "admin001"
   }'
 
@@ -66,6 +69,7 @@ curl -X POST "$BASE_URL/users/" \
     "prenom": "Amina",
     "mot_de_passe": "Agent@Pass2",
     "role": "agent",
+    "email": "K0TJW@example.com",
     "id_admin": "admin001"
   }'
 
@@ -79,6 +83,7 @@ curl -X POST "$BASE_URL/users/" \
     "prenom": "Karim",
     "mot_de_passe": "Agent@Pass3",
     "role": "agent",
+    "email": "7lMkK@example.com",
     "id_admin": "admin002"
   }'
 
@@ -99,6 +104,7 @@ curl -X POST "$BASE_URL/clients/" \
     "adresse": "45 Rue Mohamed V, Casablanca",
     "tel": "+212661234567",
     "cin": "AB123456",
+    "email": "l2Nl8@example.com",
     "num_permis": "P123456789"
   }'
 
@@ -114,6 +120,7 @@ curl -X POST "$BASE_URL/clients/" \
     "adresse": "12 Boulevard Zerktouni, Casablanca",
     "tel": "+212662345678",
     "cin": "CD234567",
+    "email": "Bx3cM@example.com",
     "num_permis": "P234567890"
   }'
 
@@ -129,6 +136,7 @@ curl -X POST "$BASE_URL/clients/" \
     "adresse": "78 Avenue Hassan II, Rabat",
     "tel": "+212663456789",
     "cin": "EF345678",
+    "email": "Ko4Gt@example.com",
     "num_permis": "P345678901"
   }'
 
@@ -144,6 +152,7 @@ curl -X POST "$BASE_URL/clients/" \
     "adresse": "23 Rue de la Liberté, Marrakech",
     "tel": "+212664567890",
     "cin": "GH456789",
+    "email": "L2i0b@example.com",
     "num_permis": "P456789012"
   }'
 
@@ -159,6 +168,7 @@ curl -X POST "$BASE_URL/clients/" \
     "adresse": "56 Avenue Mohammed VI, Tanger",
     "tel": "+212665678901",
     "cin": "IJ567890",
+    "email": "L2i0b@example.com",
     "num_permis": "P567890123"
   }'
 

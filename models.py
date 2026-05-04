@@ -13,7 +13,8 @@ class Utilisateur(Base):
     mot_de_passe = Column(Text, nullable=False)
     role = Column(String(20), nullable=False)
     id_admin = Column(String(50), ForeignKey('utilisateur.id_user'), nullable=True)
-    
+    # img = Column(Text, nullable=True)
+    email = Column(String(100), unique=True, nullable=False)
     # Contrainte CHECK pour le rôle
     __table_args__ = (
         CheckConstraint("role IN ('admin', 'agent')", name='check_role'),
@@ -37,7 +38,7 @@ class Client(Base):
     tel = Column(String(20), nullable=False)
     cin = Column(String(20), unique=True, nullable=False)
     num_permis = Column(String(50), unique=True, nullable=False)
-    
+    email = Column(String(100), unique=True, nullable=False)
     # Relations
     reservations = relationship("Reservation", back_populates="client", cascade="all, delete-orphan")
 
@@ -51,7 +52,6 @@ class Vehicule(Base):
     carburant = Column(String(30), nullable=False)
     prix_par_jour = Column(Float, nullable=False)
     status = Column(String(20), default='disponible')
-    
     # Contrainte CHECK pour le prix
     __table_args__ = (
         CheckConstraint("prix_par_jour > 0", name='check_prix_positif'),

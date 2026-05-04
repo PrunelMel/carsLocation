@@ -32,11 +32,11 @@ def get_vehicule_by_id(id : str , db : Session = Depends(get_db)):
 def create_vehicule(request : schemas.Vehicule , db : Session = Depends(get_db)):
     new_vehicule = models.Vehicule(
         id_vehicule = request.id_vehicule,
-marque =request.marque,
-modele = request.modele,
-carburant = request.carburant,
-prix_par_jour = request.prix_par_jour,
-status = request.status
+        marque =request.marque,
+        modele = request.modele,
+        carburant = request.carburant,
+        prix_par_jour = request.prix_par_jour,
+        status = request.status
     )
 
     db.add(new_vehicule)

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import models
 from database import engine
-from routers import users, clients,vehicules,reservations,retour,paiement
+from routers import users, clients,vehicules,reservations,retour,paiement, login
 
 
 # Crée les tables une seule fois au démarrage
@@ -16,3 +16,4 @@ app.include_router(vehicules.router)
 app.include_router(reservations.router)
 app.include_router(retour.router)
 app.include_router(paiement.router)
+app.include_router(login.router)
