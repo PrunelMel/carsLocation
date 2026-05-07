@@ -1,0 +1,51 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Environnement Virtuel (Très important selon ton image) ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- Base de données (Si tu utilises SQLite localement) ---
+*.db
+*.sqlite3
+data/
+
+# --- Variables d'environnement (Sécurité) ---
+.env
+.flaskenv
+env.local
+
+# --- FastAPI / Pydantic / Logs ---
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.log
+
+# --- Éditeurs / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
