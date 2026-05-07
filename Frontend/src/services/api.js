@@ -83,7 +83,7 @@ const login = async (endpoint, data) => {
             body: JSON.stringify(data)
         })
         if (!response.ok) {
-            throw new Error("Erreur lors de la connexion")
+            throw new Error("Identifiants invalides")
         }
        
         return response  
