@@ -168,7 +168,7 @@ class ReservationDetail(BaseModel):
     updated_at: Optional[datetime] = None
     client: ShowClient
     vehicule: ShowVehicule
-    utilisateur: Optional[ShowUtilisateur] = None 
+    utilisateur: ShowUtilisateur
 
     model_config = ConfigDict(from_attributes=True)
 
