@@ -1,4 +1,3 @@
-// apiService.js
 const Base_URL = "http://localhost:3000/api/";
 
 const fetchAll = async (endpoint) => {
