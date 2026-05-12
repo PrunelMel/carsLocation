@@ -37,8 +37,9 @@ def create_user(request : schemas.UtilisateurCreate,db : Session = Depends(get_d
         admin = db.query(models.Utilisateur).filter(models.Utilisateur.id_user == request.id_admin).first()
         if not admin:
             raise HTTPException(404, "Cet admin n'existe pas")
+    id_user = hash(str(request.email))
     new_user = models.Utilisateur(
-        id_user = request.id_user,
+        id_user = id_user,
         nom = request.nom,
         prenom = request.prenom,
         mot_de_passe = hash_password(request.mot_de_passe),

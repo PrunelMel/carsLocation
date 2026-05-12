@@ -63,7 +63,7 @@ class ShowAdmin(BaseModel):
 
 
 class UtilisateurCreate(BaseModel):
-    id_user: str = Field(..., max_length=50)
+    # id_user: str = Field(..., max_length=50)
     nom: str = Field(..., max_length=100)
     prenom: str = Field(..., max_length=100)
     mot_de_passe: str
@@ -90,12 +90,11 @@ class ShowUtilisateur(BaseModel):
 # CLIENT 
 
 class ClientCreate(BaseModel):
-    id_client: str = Field(..., max_length=50)
     nom: str = Field(..., max_length=100)
     prenom: str = Field(..., max_length=100)
     mot_de_passe: str
     adresse: str
-    email: str = Field(..., max_length=100, pattern=r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    email: str = Field(..., max_length=100,)
     tel: str = Field(..., max_length=20)
     cin: str = Field(..., max_length=20)
     num_permis: str = Field(..., max_length=50)
@@ -117,7 +116,7 @@ class ShowClient(BaseModel):
 # VEHICULE 
 
 class VehiculeCreate(BaseModel):
-    id_vehicule: str = Field(..., max_length=50)
+    # id_vehicule: str = Field(..., max_length=50)
     marque: str = Field(..., max_length=50)
     modele: str = Field(..., max_length=50)
     carburant: str = Field(..., max_length=30)
@@ -142,7 +141,7 @@ class ShowVehicule(BaseModel):
 # RESERVATION
 
 class ReservationCreate(BaseModel):
-    id_reservation: str = Field(..., max_length=50)
+        # id_reservation: str = Field(..., max_length=50)
     date_debut: date
     date_fin: date
     date_reservation: Optional[date] = None
@@ -181,7 +180,7 @@ class ReservationUpdate(BaseModel):
 # PAIEMENT 
 
 class PaiementCreate(BaseModel):
-    id_paiement: str = Field(..., max_length=50)
+    # id_paiement: str = Field(..., max_length=50)
     mode_paiement: ModePaiementEnum = Field(default=ModePaiementEnum.carte)
     id_reservation: str = Field(..., max_length=50)
 
@@ -199,7 +198,7 @@ class ShowPaiement(BaseModel):
 #  RETOUR 
 
 class RetourCreate(BaseModel):
-    id_retour: str = Field(..., max_length=50)
+    # id_retour: str = Field(..., max_length=50)
     date_retour: date
     etat_voiture: EtatVehiculeEnum
     frais_supplementaire: Optional[float] = 0

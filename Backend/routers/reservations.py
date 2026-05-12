@@ -30,16 +30,16 @@ def create_reservation(request: schemas.ReservationCreate, db: Session = Depends
     client = db.query(models.Client).filter(models.Client.id_client == request.id_client).first()
     vehicule = db.query(models.Vehicule).filter(models.Vehicule.id_vehicule == request.id_vehicule).first()
     agent = db.query(models.Utilisateur).filter(models.Utilisateur.id_user == request.id_user).first()
-
+    
     if not client:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Ce client n'existe pas")
     if not vehicule:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Ce vehicule n'existe pas")
     if not agent:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cet agent n'existe pas")
-
+    id_reservation = hash(str(request.id_client) + str(request.id_vehicule))
     new_reservation = models.Reservation(
-        id_reservation=request.id_reservation,
+        id_reservation=id_reservation,
         date_debut=request.date_debut,
         date_fin=request.date_fin,
         date_reservation=request.date_reservation,

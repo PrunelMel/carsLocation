@@ -31,8 +31,9 @@ def get_vehicule_by_id(id_vehicule: str, db: Session = Depends(get_db)):
 # CORRECTION : schemas.Vehicule → schemas.VehiculeCreate (le schéma correct)
 @router.post("/", response_model=schemas.ShowVehicule, status_code=status.HTTP_201_CREATED)
 def create_vehicule(request: schemas.VehiculeCreate, db: Session = Depends(get_db)):
+    id_vehicule = hash(str(request.marque) + str(request.modele) + str(request.prix_par_jour) )
     new_vehicule = models.Vehicule(
-        id_vehicule=request.id_vehicule,
+        id_vehicule=id_vehicule,
         marque=request.marque,
         modele=request.modele,
         carburant=request.carburant,
