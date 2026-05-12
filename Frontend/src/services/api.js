@@ -98,6 +98,8 @@ export const apiService = {
     createClient: (data) => create("clients", data),
     updateClient: (id, data) => update(`clients/${id}`, data),
     deleteClient: (id) => supprimer("clients", id),
+    loginClient : (data)=>login("login/",data),
+
     
     //Operations sur clients
     getUtilisateur: () =>  fetchAll("users"),
