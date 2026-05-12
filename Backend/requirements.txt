@@ -1,5 +1,6 @@
-fastapi
+fastapi[standard]
 sqlalchemy
 uvicorn
 passlib
 argon2-cffi
+pydantic
