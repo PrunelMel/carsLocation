@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import InfoCard from '../components/InfoCard'
-import vite from '../assets/react.svg'
-import monnaie from '../assets/monnaie1.png'
-import carlouer from '../assets/car.svg'
-import carDispo from '../assets/carDispo.png'
-import agentActif from '../assets/agentActif.png'
-import StatusReservations from '../components/StatusReservations'
-import HistoriqueLocations from '../components/HistoriqueLocations'
-import AgentsCard from '../components/AgentsCard'
-import VehiculesCard from '../components/VehiculesCard'
+import Navbar from '../../components/Navbar'
+import InfoCard from '../../components/InfoCard'
+import vite from '../../assets/react.svg'
+import monnaie from '../../assets/monnaie1.png'
+import carlouer from '../../assets/car.svg'
+import carDispo from '../../assets/carDispo.png'
+import agentActif from '../../assets/agentActif.png'
+import StatusReservations from '../../components/StatusReservations'
+import HistoriqueLocations from '../../components/HistoriqueLocations'
+import AgentsCard from '../../components/AgentsCard'
+import VehiculesCard from '../../components/VehiculesCard'
 
 
-import { apiService } from '../services/api'
+import { apiService } from '../../services/api'
 
 function Board() {
     const [agents, setAgents] = useState([])

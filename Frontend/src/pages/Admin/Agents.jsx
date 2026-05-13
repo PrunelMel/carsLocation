@@ -1,7 +1,7 @@
-import  { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import { apiService } from '../services/api'
-import ShowAgent from '../components/ShowAgent'
+import { useEffect, useState } from 'react'
+import Navbar from '../../components/Navbar'
+import { apiService } from '../../services/api'
+import ShowAgent from '../../components/ShowAgent'
 import { Link } from 'react-router-dom'
 function Agents() {
     const [agents, setAgents] = useState([])

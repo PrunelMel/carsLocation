@@ -1,27 +1,59 @@
-import React from 'react'
-import {apiService} from './services/api'
-import { Routes,Route } from 'react-router-dom'
-import Board from './pages/Board'
-import Agents from './pages/Agents'
-import Locations from './pages/Locations'
-import Login from './pages/Login'
-import Parking from './pages/Parking'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import AdminLayout from './layouts/AdminLayout';
+import AgentLayout from './layouts/AgentLayout';
+import Board from './pages/Admin/Board';
+import Agents from './pages/Admin/Agents';
+import Parking from './pages/Admin/Parking';
+import Locations from './pages/Admin/Locations';
+import Login from './pages/Login';          // ← page unique de login
+import AgentBoard from './pages/Agent/AgentBoard';
+import AgentReservations from './pages/Agent/AgentReservations';
+import AgentParkingVehicles from './pages/Agent/AgentParkingVehicles';
 
-function App() {
-    
-  
-  return (
-    <div className='min-h-screen '>
-   <Routes>
-        <Route path='/admin' element={<Board></Board>}></Route>
-        <Route path='/admin/agents' element={<Agents></Agents>}></Route>
-        <Route path='/admin/parking' element={<Parking></Parking>}></Route>
-        <Route path='/admin/locations' element={<Locations></Locations>}></Route>
-        <Route path='/login' element={<Login></Login>}></Route>
-       
-   </Routes>
-   </div>
-  )
+function RequireAuth({ role, children }) {
+  const userRole = localStorage.getItem('userRole');
+  if (!userRole) return <Navigate to="/login" replace />;
+  if (userRole !== role) return <Navigate to={userRole === 'admin' ? '/admin' : '/agent'} replace />;
+  return children;
 }
 
-export default App
+function App() {
+  const userRole = localStorage.getItem('userRole');
+
+  return (
+    <Routes>
+      {/* Redirection racine */}
+      <Route
+        path="/"
+        element={
+          userRole === 'admin' ? <Navigate to="/admin" replace />
+          : userRole === 'agent' ? <Navigate to="/agent" replace />
+          : <Navigate to="/login" replace />
+        }
+      />
+
+      
+      <Route path="/login" element={<Login />} />
+
+      {/* Routes Admin */}
+      <Route path="/admin" element={<RequireAuth role="admin"><AdminLayout /></RequireAuth>}>
+        <Route index element={<Board />} />
+        <Route path="agents" element={<Agents />} />
+        <Route path="parking" element={<Parking />} />
+        <Route path="locations" element={<Locations />} />
+      </Route>
+
+      {/* Routes Agent */}
+      <Route path="/agent" element={<RequireAuth role="agent"><AgentLayout /></RequireAuth>}>
+        <Route index element={<AgentBoard />} />
+        <Route path="parking" element={<AgentParkingVehicles />} />
+        <Route path="locations" element={<AgentReservations />} />
+      </Route>
+
+      {/* Fallback */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
+export default App;

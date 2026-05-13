@@ -1,30 +1,38 @@
-function AgentCard({ nom, prenom, email }) {
+function AgentCard({ nom = '', prenom = '', email = '' }) {
   return (
-    <div >
+    <div className='flex items-center gap-3 bg-white rounded-xl p-3 shadow-sm'>
+      <svg viewBox='0 0 100 100' className='h-10 w-10 flex-shrink-0'>
+        <circle cx={50} cy={50} r={45} fill='#dbeafe' />
+        <text
+          x="50" y="50"
+          textAnchor="middle"
+          dominantBaseline="central"
+          fill='#2563eb'
+          fontSize="48"
+          fontWeight="bold"
+        >
+          {nom ? nom.at(0).toUpperCase() : '?'}
+        </text>
+      </svg>
       <div>
-        <svg viewBox='0 0 100 100' className='h-5'>
-          <circle cx={50} cy={50} r={40} />
-          <text x="50" y="50" textAnchor="middle" dominantBaseline="central" fill='var(--color-blue-500)'
-            className='text-6xl font-semibold '
-
-          >
-            {nom.at(0)}
-          </text>
-        </svg>
-        {nom && <p className='text-2xl font-semibold '>{prenom} {nom}</p>}
-        {email && <p className='text-gray-500'>{email}</p>}</div>
+        {nom && <p className='font-semibold'>{prenom} {nom}</p>}
+        {email && <p className='text-gray-500 text-sm'>{email}</p>}
+      </div>
     </div>
   )
 }
 
-function AgentsCard({ agents }) {
+function AgentsCard({ agents = [] }) {
   return (
-    <div>
-    <h1>Agents</h1>
-    <div className='flex flex-wrap gap-5'>
-      {agents.map((agent) => (
-        <AgentCard key={agent.id_user} {...agent} />
-      ))}
+    <div className='bg-white rounded-xl shadow-[0_0_5px_0_rgba(0,0,0,0.2)] p-5'>
+      <h1 className='text-lg font-bold mb-3'>Agents ({agents.length})</h1>
+      <div className='flex flex-col gap-3'>
+        {agents.length === 0
+          ? <p className='text-gray-400 text-sm'>Aucun agent</p>
+          : agents.map((agent) => (
+            <AgentCard key={agent.id_user} {...agent} />
+          ))
+        }
       </div>
     </div>
   )

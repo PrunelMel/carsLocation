@@ -4,7 +4,7 @@ const fetchAll = async (endpoint) => {
     try {
         const response = await fetch(`${Base_URL}${endpoint}`)
         if (!response.ok) {
-            throw new Error("Bad response")
+            throw new Error("Erreur lors de la récuperation des données")
         }
         const data = await response.json()
         return data
@@ -24,7 +24,7 @@ const create = async (endpoint, data) => {
             body: JSON.stringify(data)
         })
         if (!response.ok) {
-            throw new Error("Erreur lors de la création")
+            throw new Error("Erreur lors de la création de la création")
         }
         return response
     } catch (error) {
