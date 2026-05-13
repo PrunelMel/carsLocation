@@ -30,8 +30,9 @@ def get_client_by_id(id_client:str,db : Session = Depends(get_db)):
 # Créer un nouveau Client
 @router.post("/", status_code=status.HTTP_201_CREATED,response_model=schemas.ShowClient)
 def create_client(request : schemas.ClientCreate, db : Session = Depends(get_db)):
+    id_client = hash(request.email)
     new_client = models.Client(
-        id_client = request.id_client,
+        id_client = id_client,
         nom = request.nom,
         mot_de_passe = hash_password(request.mot_de_passe),
         prenom = request.prenom,

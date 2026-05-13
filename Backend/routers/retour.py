@@ -33,9 +33,9 @@ def create_retour(request: schemas.RetourCreate, db: Session = Depends(get_db)):
     if not reservation:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cette reservation n'existe pas")
    
-
+    id_retour = hash(str(request.id_reservation) + str(request.frais_supplementaire))
     new_retour = models.Retour(    
-        id_retour = request.id_retour,
+        id_retour = id_retour,
         id_reservation =request.id_reservation,      
         date_retour = request.date_retour,
         etat_voiture = request.etat_voiture,

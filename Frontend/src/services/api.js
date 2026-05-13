@@ -4,7 +4,8 @@ const fetchAll = async (endpoint) => {
     try {
         const response = await fetch(`${Base_URL}${endpoint}`)
         if (!response.ok) {
-            throw new Error("Erreur lors de la récuperation des données")
+            const erreur = await response.json()            
+            throw new Error(erreur.detail);
         }
         const data = await response.json()
         return data
@@ -24,7 +25,11 @@ const create = async (endpoint, data) => {
             body: JSON.stringify(data)
         })
         if (!response.ok) {
-            throw new Error("Erreur lors de la création de la création")
+            const erreur = await response.json()
+            console.log(erreur)
+            
+            throw new Error(erreur.detail);
+            
         }
         return response
     } catch (error) {
@@ -43,7 +48,8 @@ const update = async (endpoint, data) => {
             body: JSON.stringify(data)
         })
         if (!response.ok) {
-            throw new Error("Erreur lors de la mise à jour")
+             const erreur = await response.json()            
+                throw new Error(erreur.detail);
         }
         return await response.json()
     } catch (error) {
@@ -61,7 +67,8 @@ const supprimer = async (endpoint, id) => {
             }
         })
         if (!response.ok) {
-            throw new Error("Erreur lors de la suppression")
+           const erreur = await response.json()            
+                throw new Error(erreur.detail);
         }
        
         return response
@@ -82,7 +89,8 @@ const login = async (endpoint, data) => {
             body: JSON.stringify(data)
         })
         if (!response.ok) {
-            throw new Error("Identifiants invalides")
+            const erreur = await response.json()            
+                throw new Error(erreur.detail);
         }
        
         return response  

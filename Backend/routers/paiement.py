@@ -30,12 +30,11 @@ def create_paiement(request: schemas.PaiementCreate, db: Session = Depends(get_d
  
     if not reservation :
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Reservation n'existe pas")
-
+    id_paiement = hash(request.id_reservation)
     new_paiement = models.Paiement(    
-        id_paiement = request.id_paiement,
+        id_paiement = id_paiement,
         id_reservation =request.id_reservation, 
         mode_paiement = request.mode_paiement     
-        
     )
     db.add(new_paiement)
     db.commit()
