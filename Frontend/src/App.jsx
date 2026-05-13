@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 import AgentLayout from './layouts/AgentLayout';
+import ClientLayout from "./layouts/ClientLayout";
 import Board from './pages/Admin/Board';
 import Agents from './pages/Admin/Agents';
 import Parking from './pages/Admin/Parking';
@@ -9,7 +10,8 @@ import Login from './pages/Login';          // ← page unique de login
 import AgentBoard from './pages/Agent/AgentBoard';
 import AgentReservations from './pages/Agent/AgentReservations';
 import AgentParkingVehicles from './pages/Agent/AgentParkingVehicles';
-
+import Home from './pages/Home/Home';
+import CarListing from './components/CarListing';
 function RequireAuth({ role, children }) {
   const userRole = localStorage.getItem('userRole');
   if (!userRole) return <Navigate to="/login" replace />;
@@ -28,11 +30,14 @@ function App() {
         element={
           userRole === 'admin' ? <Navigate to="/admin" replace />
           : userRole === 'agent' ? <Navigate to="/agent" replace />
-          : <Navigate to="/login" replace />
+          : <Navigate to="/home" replace />
         }
       />
 
-      
+      <Route path="/home" element={<ClientLayout />}>
+        <Route index element={<Home />} />
+        <Route path="cars" element={<CarListing />}></Route>
+      </Route>
       <Route path="/login" element={<Login />} />
 
       {/* Routes Admin */}

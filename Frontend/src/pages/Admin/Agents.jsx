@@ -109,7 +109,7 @@ function Agents() {
         setSucces('Agent mis à jour avec succès !')
       } else {
         // Pour la création, on exclut id_user car il est généré par le backend
-        const { id_user, ...createPayload } = agentEnCours
+        const {  ...createPayload } = agentEnCours
         await apiService.createUtilisateur(createPayload)
         setSucces('Agent ajouté avec succès !')
       }
