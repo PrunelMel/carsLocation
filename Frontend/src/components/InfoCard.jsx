@@ -1,4 +1,3 @@
-import React from 'react'
 
 function InfoCard({src,nombre=0,nom,device}) {
     

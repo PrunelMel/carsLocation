@@ -1,4 +1,3 @@
-import React from 'react'
 function LocationRow({ client="", vehicule="", utilisateur="", date_debut="", date_fin="", status="" }) {
   return (
     <tr className='bg-white  hover:bg-gray-100 '>

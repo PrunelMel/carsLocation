@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { apiService } from '../services/api'
 import ShowAgent from '../components/ShowAgent'
@@ -9,7 +9,7 @@ function Agents() {
         const supprimer = async () => {
             try {
                 const accord = confirm("Voulez vous supprimer cet utilisateur ?")
-                if (supprimer) {
+                if (accord) {
                     const reponse = await apiService.deleteUtilisateur(id_user)
                     if (reponse.ok) {
 
@@ -30,11 +30,6 @@ function Agents() {
 
 
     }
-
-    function handleModifier() {
-
-    }
-
 
     useEffect(() => {
         const fetchAgent = async () => {

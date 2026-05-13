@@ -1,4 +1,3 @@
-import React from 'react'
 function AgentCard({ nom, prenom, email }) {
   return (
     <div >
@@ -16,7 +15,7 @@ function AgentCard({ nom, prenom, email }) {
         {email && <p className='text-gray-500'>{email}</p>}</div>
     </div>
   )
-}j
+}
 
 function AgentsCard({ agents }) {
   return (
@@ -26,7 +25,7 @@ function AgentsCard({ agents }) {
       {agents.map((agent) => (
         <AgentCard key={agent.id_user} {...agent} />
       ))}
-      </div>j
+      </div>
     </div>
   )
 }
