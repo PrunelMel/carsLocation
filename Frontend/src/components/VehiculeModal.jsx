@@ -34,19 +34,7 @@ function VehiculeModal({
         )}
 
         <div className='flex flex-col gap-4'>
-          {!modeEdition && (
-            <div>
-              <label className='text-sm font-semibold text-gray-700'>ID Véhicule</label>
-              <input
-                type='text'
-                required
-                placeholder='VH001'
-                value={vehicule.id_vehicule}
-                onChange={e => onChange({ ...vehicule, id_vehicule: e.target.value })}
-                className='w-full h-10 border border-gray-300 rounded px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400'
-              />
-            </div>
-          )}
+      
 
           <div className='grid grid-cols-2 gap-3'>
             <div>

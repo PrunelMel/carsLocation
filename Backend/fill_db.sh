@@ -31,7 +31,7 @@ try:
 
     admins = [
         models.Utilisateur(
-            id_user='admin1',
+          
             nom='Admin',
             prenom='Un',
             mot_de_passe=hash_password('Admin123!'),
@@ -39,7 +39,6 @@ try:
             email='admin1@example.com',
         ),
         models.Utilisateur(
-            id_user='admin2',
             nom='Admin',
             prenom='Deux',
             mot_de_passe=hash_password('Admin123!'),
@@ -50,7 +49,6 @@ try:
 
     agents = [
         models.Utilisateur(
-            id_user='agent1',
             nom='Agent',
             prenom='Un',
             mot_de_passe=hash_password('Agent123!'),
@@ -59,7 +57,6 @@ try:
             email='agent1@example.com',
         ),
         models.Utilisateur(
-            id_user='agent2',
             nom='Agent',
             prenom='Deux',
             mot_de_passe=hash_password('Agent123!'),
@@ -68,7 +65,6 @@ try:
             email='agent2@example.com',
         ),
         models.Utilisateur(
-            id_user='agent3',
             nom='Agent',
             prenom='Trois',
             mot_de_passe=hash_password('Agent123!'),
@@ -81,7 +77,6 @@ try:
     clients = []
     for i in range(1, 6):
         clients.append(models.Client(
-            id_client=f'client{i}',
             mot_de_passe=hash_password(f'Client{i}123!'),
             nom=f'Client{i}',
             prenom='Test',
@@ -94,7 +89,6 @@ try:
 
     vehicules = [
         models.Vehicule(
-            id_vehicule=f'vehicule{i}',
             marque=marque,
             modele=f'Modele{i}',
             carburant=carburant,
@@ -116,16 +110,13 @@ try:
     retours = []
 
     for i in range(1, 6):
-        reservation_id = f'reservation{i}'
-        vehicule_id = f'vehicule{i}'
-        client_id = f'client{i}'
-        utilisateur_id = f'agent{((i - 1) % 3) + 1}'
+     
         debut = date.today() + timedelta(days=i)
         fin = debut + timedelta(days=3)
         montant_total = 100.0 + i * 20.0
 
         reservation = models.Reservation(
-            id_reservation=reservation_id,
+           
             date_debut=debut,
             date_fin=fin,
             montant_total=montant_total,
@@ -135,7 +126,7 @@ try:
             id_user=utilisateur_id,
         )
         paiement = models.Paiement(
-            id_paiement=f'paiement{i}',
+     
             id_reservation=reservation_id,
             mode_paiement='carte',
         )

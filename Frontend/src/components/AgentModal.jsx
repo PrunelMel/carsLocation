@@ -41,19 +41,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
             </div>
           </div>
 
-          {!modeEdition && (
-            <div>
-              <label className='text-sm font-semibold text-gray-700'>ID Agent</label>
-              <input
-                type='text'
-                required
-                placeholder='agent_001'
-                value={agent.id_user}
-                onChange={e => onChange({ ...agent, id_user: e.target.value })}
-                className='w-full h-10 border border-gray-300 rounded px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400'
-              />
-            </div>
-          )}
+          
 
           <div>
             <label className='text-sm font-semibold text-gray-700'>Email</label>

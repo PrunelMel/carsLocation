@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import InfoCard from '../../components/InfoCard'
-import vite from '../../assets/react.svg'
 import monnaie from '../../assets/monnaie1.png'
 import carlouer from '../../assets/car.svg'
 import carDispo from '../../assets/carDispo.png'
@@ -28,7 +27,7 @@ function Board() {
         "terminee": 0,
         "annulee": 0
     })
-    const [paiments, setPaiments] = useState({})
+   
     const [montantMensuel, setMontantMensuel] = useState(0)
     const [locations, setLocations] = useState([])
     const [vehicules, setVehicules] = useState([])
@@ -43,7 +42,7 @@ function Board() {
                 const dataAgents = await apiService.getUtilisateur()
                 const dataVehicules = await apiService.getVehicules()
                 const dataReservations = await apiService.getReservations()
-                console.log(dataAgents)
+                
                 setLocations(dataReservations)
                 setVehicules(dataVehicules)
                 const a = dataReservations.reduce((acc, reservation) => {

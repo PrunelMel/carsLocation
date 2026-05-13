@@ -25,9 +25,11 @@ function Login() {
     setSucces('')
     setLoading(true)
     try {
-      await apiService.loginUtilisateur(formData)
+      const response = await apiService.loginUtilisateur(formData)
       localStorage.setItem('userEmail', formData.email)
       localStorage.setItem('userRole', formData.role)
+      localStorage.setItem('userId', response.id)
+      console.log(response.id)
       setSucces('Connecté avec succès')
       setTimeout(() => {
         navigate(formData.role === 'admin' ? '/admin' : '/agent')

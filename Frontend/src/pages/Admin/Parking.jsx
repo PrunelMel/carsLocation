@@ -47,7 +47,7 @@ function Parking() {
   const vehiculesFiltres =
     filter === 'tous' ? vehicules : vehicules.filter(v => v.status === filter)
 
-  // ─── Ouvrir Ajout ─────────────────────────────────────────
+  // Ouvrir Ajout 
   function ouvrirAjout() {
     setModeEdition(false)
     setVehiculeEnCours(EMPTY_FORM)
@@ -57,7 +57,7 @@ function Parking() {
     setShowModal(true)
   }
 
-  // ─── Ouvrir Édition ───────────────────────────────────────
+  //Ouvrir Édition (Pour modifier)
   function ouvrirEdition(vehicule) {
     setModeEdition(true)
     setVehiculeEnCours({ ...vehicule })
@@ -85,10 +85,7 @@ function Parking() {
       setErreur('Le prix par jour doit être supérieur à 0.')
       return
     }
-    if (!modeEdition && !vehiculeEnCours.id_vehicule.trim()) {
-      setErreur('L\'identifiant du véhicule est obligatoire.')
-      return
-    }
+    
 
     setSaving(true)
     try {

@@ -4,32 +4,34 @@ import { apiService } from '../../services/api'
 import AgentCard from '../../components/AgentCard'
 import AgentModal from '../../components/AgentModal'
 
-const EMPTY_FORM = {
+
+
+function Agents() {
+  const myEmail = localStorage.getItem('userEmail')
+  const myId = localStorage.getItem('userId')
+  const [agents, setAgents] = useState([])
+  const [loading, setLoading] = useState(true)
+  const formulaire = {
   id_user: '',
   nom: '',
   prenom: '',
   mot_de_passe: '',
   email: '',
   role: 'agent',
-  id_admin: "admin" ,
+  id_admin: myId ,
   img: '',
 }
-
-function Agents() {
-  const [agents, setAgents] = useState([])
-  const [loading, setLoading] = useState(true)
 
   // Modal state
   const [showModal, setShowModal] = useState(false)
   const [modeEdition, setModeEdition] = useState(false)
-  const [agentEnCours, setAgentEnCours] = useState(EMPTY_FORM)
+  const [agentEnCours, setAgentEnCours] = useState(formulaire)
   const [idEdition, setIdEdition] = useState(null)
   const [erreur, setErreur] = useState('')
   const [succes, setSucces] = useState('')
   const [saving, setSaving] = useState(false)
 
-  const myEmail = localStorage.getItem('userEmail')
-  const myId = localStorage.getItem('userId')
+
 
   // ─── Fetch ───────────────────────────────────────────────
   const fetchAgents = async () => {
@@ -50,7 +52,7 @@ function Agents() {
   // ─── Ouvrir modal Ajout ───────────────────────────────────
   function ouvrirAjout() {
     setModeEdition(false)
-    setAgentEnCours({ ...EMPTY_FORM, id_admin: myId ?? myEmail })
+    setAgentEnCours({ ...formulaire })
     setIdEdition(null)
     setErreur('')
     setSucces('')
@@ -64,11 +66,11 @@ function Agents() {
       id_user: agent.id_user,
       nom: agent.nom,
       prenom: agent.prenom,
-      mot_de_passe: '',        // vide : ne change pas si non rempli
+      mot_de_passe: '',      
       email: agent.email,
       role: agent.role,
-      id_admin: agent.admin?.id_user ?? myId ?? myEmail,
-      img: agent.img ?? '',
+      id_admin: agent.id_admin,
+      img: agent.img ,
     })
     setIdEdition(agent.id_user)
     setErreur('')
@@ -76,7 +78,7 @@ function Agents() {
     setShowModal(true)
   }
 
-  // ─── Submit (création ou mise à jour) ────────────────────
+ 
   async function handleSubmit() {
     setErreur('')
     setSucces('')
@@ -84,10 +86,6 @@ function Agents() {
     // Validations simples
     if (!agentEnCours.nom.trim() || !agentEnCours.prenom.trim() || !agentEnCours.email.trim()) {
       setErreur('Nom, prénom et email sont obligatoires.')
-      return
-    }
-    if (!modeEdition && !agentEnCours.id_user.trim()) {
-      setErreur('L\'identifiant agent est obligatoire.')
       return
     }
     if (!modeEdition && !agentEnCours.mot_de_passe.trim()) {
@@ -110,7 +108,9 @@ function Agents() {
         await apiService.updateUtilisateur(idEdition, agentEnCours)
         setSucces('Agent mis à jour avec succès !')
       } else {
-        await apiService.createUtilisateur(agentEnCours)
+        // Pour la création, on exclut id_user car il est généré par le backend
+        const { id_user, ...createPayload } = agentEnCours
+        await apiService.createUtilisateur(createPayload)
         setSucces('Agent ajouté avec succès !')
       }
       await fetchAgents()
@@ -167,6 +167,7 @@ function Agents() {
           ))}
         </div>
       )}
+      {console.log(myId)}
 
       <AgentModal
         isOpen={showModal}
