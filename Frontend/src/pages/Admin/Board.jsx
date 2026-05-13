@@ -87,7 +87,7 @@ function Board() {
                 </h1>
                 <h2 className='text-gray-500'>Vue d'ensemble de votre Agence</h2>
             </div>
-            <div className='grid grid-cols-4 gap-8 p-5'>
+            <div className='grid grid-cols-4 gap-8 p-6'>
                 <InfoCard nom="Revenus mensuel" nombre={montantMensuel} device="DH" src={monnaie}></InfoCard>
                 <InfoCard nom="Vehicule loués" nombre={etatVehicules.louer} src={carlouer}></InfoCard>
                 <InfoCard nom="Vehicule disponible" nombre={etatVehicules.disponible} src={carDispo}></InfoCard>
