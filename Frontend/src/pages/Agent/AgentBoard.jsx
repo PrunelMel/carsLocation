@@ -19,9 +19,7 @@ function AgentBoard() {
                 const dataVehicules = await apiService.getVehicules()
                 
                 // Compter les réservations de l'agent connecté
-                const agentReservations = dataReservations.filter(
-                    res => res.agent && res.agent.email === userEmail
-                ).length
+                const agentReservations = dataReservations.filter(res => res.utilisateur && res.utilisateur.email === userEmail).length
                 
                 // Compter les véhicules disponibles
                 const availableVehicles = dataVehicules.filter(v => v.status === 'disponible').length

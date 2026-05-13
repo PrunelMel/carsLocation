@@ -20,7 +20,7 @@ function Parking() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('tous')
 
-  // Modal state
+  
   const [showModal, setShowModal] = useState(false)
   const [modeEdition, setModeEdition] = useState(false)
   const [vehiculeEnCours, setVehiculeEnCours] = useState(EMPTY_FORM)
@@ -30,7 +30,9 @@ function Parking() {
   const [saving, setSaving] = useState(false)
 
   // ─── Fetch ────────────────────────────────────────────────
-  const fetchVehicules = async () => {
+  
+
+  useEffect(() => {const fetchVehicules = async () => {
     try {
       setLoading(true)
       const data = await apiService.getVehicules()
@@ -40,9 +42,8 @@ function Parking() {
     } finally {
       setLoading(false)
     }
-  }
-
-  useEffect(() => { fetchVehicules() }, [])
+  };
+   fetchVehicules() }, [])
 
   const vehiculesFiltres =
     filter === 'tous' ? vehicules : vehicules.filter(v => v.status === filter)
@@ -101,7 +102,7 @@ function Parking() {
         await apiService.createVehicules(payload)
         setSucces('Véhicule ajouté avec succès !')
       }
-      await fetchVehicules()
+      fetchVehicules()
       setTimeout(() => setShowModal(false), 800)
     } catch (err) {
       setErreur('Erreur : ' + (err.message ?? 'inconnue'))
