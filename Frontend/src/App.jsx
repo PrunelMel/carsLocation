@@ -12,6 +12,10 @@ import AgentReservations from './pages/Agent/AgentReservations';
 import AgentParkingVehicles from './pages/Agent/AgentParkingVehicles';
 import Home from './pages/Home/Home';
 import CarListing from './components/CarListing';
+import ClientLogin from './pages/ClientLogin';
+import Reservation from './pages/Reservation';
+import { use, useEffect } from 'react';
+import { useNavigation } from 'react-router-dom';
 function RequireAuth({ role, children }) {
   const userRole = localStorage.getItem('userRole');
   if (!userRole) return <Navigate to="/login" replace />;
@@ -19,8 +23,15 @@ function RequireAuth({ role, children }) {
   return children;
 }
 
+function ClientAuth({children}) {
+  const clientRole = localStorage.getItem('clientRole');
+  if (!clientRole) return <Navigate to="/login" replace />;
+  return children;
+}
+
 function App() {
   const userRole = localStorage.getItem('userRole');
+  
 
   return (
     <Routes>
@@ -37,6 +48,8 @@ function App() {
       <Route path="/home" element={<ClientLayout />}>
         <Route index element={<Home />} />
         <Route path="cars" element={<CarListing />}></Route>
+        <Route path='login' element={<ClientLogin />}></Route>
+        <Route path='mesReservations' element={<Reservation />}></Route>
       </Route>
       <Route path="/login" element={<Login />} />
 
