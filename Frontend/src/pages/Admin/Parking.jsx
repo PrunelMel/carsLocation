@@ -29,10 +29,8 @@ function Parking() {
   const [succes, setSucces] = useState('')
   const [saving, setSaving] = useState(false)
 
-  // ─── Fetch ────────────────────────────────────────────────
-  
-
-  useEffect(() => {const fetchVehicules = async () => {
+  // Chargement des véhicules
+  const fetchVehicules = async () => {
     try {
       setLoading(true)
       const data = await apiService.getVehicules()
@@ -43,6 +41,8 @@ function Parking() {
       setLoading(false)
     }
   };
+
+  useEffect(() => {
    fetchVehicules() }, [])
 
   const vehiculesFiltres =
@@ -67,8 +67,7 @@ function Parking() {
     setSucces('')
     setShowModal(true)
   }
-
-  // ─── Submit ───────────────────────────────────────────────
+// Ajout ou Edition
   async function handleSubmit() {
     setErreur('')
     setSucces('')
@@ -110,8 +109,7 @@ function Parking() {
       setSaving(false)
     }
   }
-
-  // ─── Suppression ──────────────────────────────────────────
+//Suppression
   async function handleDelete(id) {
     if (!window.confirm('Voulez-vous supprimer ce véhicule ?')) return
     try {
@@ -126,7 +124,7 @@ function Parking() {
     <div className='bg-gray-100 min-h-screen'>
       <Navbar />
 
-      {/* Header */}
+    
       <div className='flex justify-between items-center p-5'>
         <div>
           <h1 className='text-2xl font-bold'>Gestion du Parking</h1>

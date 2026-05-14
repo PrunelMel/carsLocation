@@ -33,7 +33,6 @@ function Agents() {
 
 
 
-  // ─── Fetch ───────────────────────────────────────────────
   const fetchAgents = async () => {
     try {
       setLoading(true)
@@ -49,7 +48,7 @@ function Agents() {
 
   useEffect(() => { fetchAgents() }, [])
 
-  // ─── Ouvrir modal Ajout ───────────────────────────────────
+  // Ouvrir modal Ajout 
   function ouvrirAjout() {
     setModeEdition(false)
     setAgentEnCours({ ...formulaire })
@@ -59,7 +58,7 @@ function Agents() {
     setShowModal(true)
   }
 
-  // ─── Ouvrir modal Édition ─────────────────────────────────
+  // Ouvrir modal Édition 
   function ouvrirEdition(agent) {
     setModeEdition(true)
     setAgentEnCours({
@@ -109,7 +108,7 @@ function Agents() {
         setSucces('Agent mis à jour avec succès !')
       } else {
         // Pour la création, on exclut id_user car il est généré par le backend
-        const {  ...createPayload } = agentEnCours
+        const {id_user, ...createPayload } = agentEnCours
         await apiService.createUtilisateur(createPayload)
         setSucces('Agent ajouté avec succès !')
       }
@@ -122,7 +121,7 @@ function Agents() {
     }
   }
 
-  // ─── Suppression ──────────────────────────────────────────
+  // Suppression 
   async function handleDelete(id_user) {
     const accord = confirm('Voulez-vous supprimer cet agent ?')
     if (!accord) return

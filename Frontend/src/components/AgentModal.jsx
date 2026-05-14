@@ -17,6 +17,17 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
 
         <div className='flex flex-col gap-4'>
           <div className='grid grid-cols-2 gap-3'>
+             <div  className='hidden'>
+              <label className='text-sm font-semibold text-gray-700'>ID agent</label>
+              <input
+                type='text'
+                required
+                placeholder='Dupont'
+                value={agent.id_agent}
+                onChange={e => onChange({ ...agent, id_user: e.target.value })}
+              
+              />
+            </div>
             <div>
               <label className='text-sm font-semibold text-gray-700'>Nom</label>
               <input
@@ -62,7 +73,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
             <input
               type='password'
               required={!modeEdition}
-              placeholder={modeEdition ? 'Laisser vide pour ne pas changer' : '••••••••'}
+              placeholder={modeEdition && '••••••••'}
               value={agent.mot_de_passe}
               onChange={e => onChange({ ...agent, mot_de_passe: e.target.value })}
               className='w-full h-10 border border-gray-300 rounded px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400'
