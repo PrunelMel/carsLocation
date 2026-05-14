@@ -4,7 +4,7 @@ from database import get_db
 import schemas
 from sqlalchemy.orm import Session
 from typing import List
-from hashing import _hash
+from hashing import _hash, hash_password
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
