@@ -97,8 +97,8 @@ function Locations() {
     <div className='bg-gray-100 min-h-screen'>
       <Navbar />
       <div className='p-5'>
-        <h1 className='text-2xl font-bold'>Gestion des Locations</h1>
-        <h2 className='text-gray-500'>Liste de toutes les réservations</h2>
+        <h1 className='text-xl md:text-2xl font-bold'>Gestion des Locations</h1>
+        <h2 className='text-sm md:text-base text-gray-500'>Liste de toutes les réservations</h2>
       </div>
 
       <ReservationFilters

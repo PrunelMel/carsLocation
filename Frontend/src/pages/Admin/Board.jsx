@@ -86,22 +86,22 @@ function Board() {
                 </h1>
                 <h2 className='text-gray-500'>Vue d'ensemble de votre Agence</h2>
             </div>
-            <div className='grid grid-cols-4 gap-8 p-5'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 p-5'>
                 <InfoCard nom="Revenus mensuel" nombre={montantMensuel} device="DH" src={monnaie}></InfoCard>
                 <InfoCard nom="Vehicule loués" nombre={etatVehicules.louer} src={carlouer}></InfoCard>
                 <InfoCard nom="Vehicule disponible" nombre={etatVehicules.disponible} src={carDispo}></InfoCard>
                 <InfoCard nom="Agent actifs" nombre={agents.length} src={agentActif}></InfoCard>
 
             </div>
-            <div className='grid grid-cols-3 gap-5 m-5'> 
-                <div className='col-span-1'> 
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 m-5'> 
+                <div className='lg:col-span-1'> 
                     <StatusReservations enAttente={etatReservations.en_attente} confirmees={etatReservations.confirmee} enCours={etatReservations.en_cours} terminees={etatReservations.terminee} annulees={etatReservations.annulee} />
                 </div>
-                <div className='col-span-2'> 
+                <div className='lg:col-span-2'> 
                     <HistoriqueLocations locations={locations} />
                 </div>
             </div>
-<div className='grid grid-cols-2 gap-5 m-5'>
+<div className='grid grid-cols-1 lg:grid-cols-2 gap-5 m-5'>
     <VehiculesCard vehicules={vehicules} />
          <AgentsCard agents={agents} />
 </div>

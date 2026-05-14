@@ -1,0 +1,17 @@
+# Node
+Frontend/node_modules/
+Frontend/.vite/
+Frontend/dist/
+
+# Logs
+*.log
+
+# Env
+.env
+
+# Python
+__pycache__/
+Backend/.venv/
+
+# IDE
+.vscode/

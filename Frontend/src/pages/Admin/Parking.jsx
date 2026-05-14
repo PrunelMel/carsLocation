@@ -125,14 +125,14 @@ function Parking() {
       <Navbar />
 
     
-      <div className='flex justify-between items-center p-5'>
+      <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 p-5'>
         <div>
-          <h1 className='text-2xl font-bold'>Gestion du Parking</h1>
-          <h2 className='text-gray-500'>Ajoutez, modifiez ou supprimez des véhicules</h2>
+          <h1 className='text-xl md:text-2xl font-bold'>Gestion du Parking</h1>
+          <h2 className='text-sm md:text-base text-gray-500'>Ajoutez, modifiez ou supprimez des véhicules</h2>
         </div>
         <button
           onClick={ouvrirAjout}
-          className='bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors'
+          className='w-full md:w-auto bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors'
         >
           + Ajouter un véhicule
         </button>

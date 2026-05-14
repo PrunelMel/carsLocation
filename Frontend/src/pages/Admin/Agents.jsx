@@ -137,14 +137,14 @@ function Agents() {
     <div className='bg-gray-100 min-h-screen'>
       <Navbar />
 
-      <div className='flex justify-between items-center m-5'>
+      <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 m-5'>
         <div>
-          <h1 className='text-2xl font-semibold'>Gestion des Agents</h1>
-          <p className='text-gray-500 text-sm'>{agents.length} agent{agents.length !== 1 ? 's' : ''} enregistré{agents.length !== 1 ? 's' : ''}</p>
+          <h1 className='text-xl md:text-2xl font-semibold'>Gestion des Agents</h1>
+          <p className='text-gray-500 text-xs md:text-sm'>{agents.length} agent{agents.length !== 1 ? 's' : ''} enregistré{agents.length !== 1 ? 's' : ''}</p>
         </div>
         <button
           onClick={ouvrirAjout}
-          className='text-white bg-blue-600 rounded-lg font-semibold px-5 py-2 hover:bg-blue-700 transition-colors'
+          className='w-full md:w-auto text-white bg-blue-600 rounded-lg font-semibold px-5 py-2 hover:bg-blue-700 transition-colors'
         >
           + Ajouter un agent
         </button>
@@ -155,7 +155,7 @@ function Agents() {
       ) : agents.length === 0 ? (
         <div className='p-10 text-center text-gray-400'>Aucun agent enregistré</div>
       ) : (
-        <div className='grid grid-cols-3 gap-5 p-5'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-5'>
           {agents.map(agent => (
             <AgentCard
               key={agent.id_user}
