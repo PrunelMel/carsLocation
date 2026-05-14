@@ -2,9 +2,9 @@ import { Outlet } from 'react-router-dom';
 
 const AgentLayout = () => {
   return (
-    <div className="agent-container">
-      <main>
-        <Outlet /> 
+    <div className="agent-container min-h-screen">
+      <main className="mx-auto max-w-screen-2xl">
+        <Outlet />
       </main>
     </div>
   );

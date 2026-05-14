@@ -14,8 +14,8 @@ function NavBar() {
   }
 
   return (
-    <div className='flex justify-between p-3 bg-white text-gray-500 shadow-sm'>
-      <ul className='flex w-1/2 justify-between items-center'>
+    <div className='flex flex-col gap-3 p-3 md:flex-row md:items-center md:justify-between bg-white text-gray-500 shadow-sm'>
+      <ul className='flex flex-wrap gap-3 md:gap-4 items-center w-full md:w-auto'>
         {isAdmin ? (
           <>
             <li className='text-xl text-blue-600 font-semibold'>
@@ -37,9 +37,11 @@ function NavBar() {
           </>
         )}
       </ul>
-      <div className='flex items-center gap-3'>
-        <img src={hero} alt="" className='w-8' />
-        <span className='mx-2'>{userRole.toUpperCase()}</span>
+      <div className='flex flex-wrap items-center gap-3 justify-between w-full md:w-auto'>
+        <div className='flex items-center gap-3'>
+          <img src={hero} alt="" className='w-8' />
+          <span className='mx-2'>{userRole.toUpperCase()}</span>
+        </div>
         <button
           onClick={handleLogout}
           className='text-red-500 font-medium hover:text-red-700 transition-colors'

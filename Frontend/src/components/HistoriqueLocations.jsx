@@ -15,10 +15,11 @@ function HistoriqueLocations({ locations }) {
   return (
     <div className='shadow-[0_0_5px_0_rgba(0,0,0,0.2)] p-5 rounded-xl bg-gray-50 border-3 border-white'>
       <h1 className='text-xl font-bold text-center mb-3'>Historique des Locations</h1>
-      <table className='min-w-full bg-gray-50  rounded-lg'>
-        <thead>
-          <tr className='bg-gray-100 text-gray-500 uppercase text-sm rounded-full '>
-            <th className='py-2 px-4 '>Client</th>
+      <div className='overflow-x-auto'>
+        <table className='min-w-full bg-gray-50 rounded-lg'>
+          <thead>
+            <tr className='bg-gray-100 text-gray-500 uppercase text-sm rounded-full '>
+              <th className='py-2 px-4 '>Client</th>
             <th className='py-2 px-4 '>Véhicule</th>
             <th className='py-2 px-4 '>Agent</th>
             <th className='py-2 px-4 '>Date de Début</th>
@@ -32,6 +33,7 @@ function HistoriqueLocations({ locations }) {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }

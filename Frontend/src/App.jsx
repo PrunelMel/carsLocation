@@ -12,15 +12,21 @@ import AgentReservations from './pages/Agent/AgentReservations';
 import AgentParkingVehicles from './pages/Agent/AgentParkingVehicles';
 import Home from './pages/Home/Home';
 import CarListing from './components/CarListing';
+import ClientLogin from './pages/ClientLogin';
+import Reservation from './pages/Reservation';
+
 function RequireAuth({ role, children }) {
   const userRole = localStorage.getItem('userRole');
   if (!userRole) return <Navigate to="/login" replace />;
-  if (userRole !== role) return <Navigate to={userRole === 'admin' ? '/admin' : '/agent'} replace />;
+  if (userRole !== role) return <Navigate to={userRole === 'admin' ? '/admin' : userRole==='agent' ? '/agent' : '/home'} replace />;
   return children;
 }
 
+
+
 function App() {
   const userRole = localStorage.getItem('userRole');
+  
 
   return (
     <Routes>
@@ -37,6 +43,8 @@ function App() {
       <Route path="/home" element={<ClientLayout />}>
         <Route index element={<Home />} />
         <Route path="cars" element={<CarListing />}></Route>
+        <Route path='login' element={<ClientLogin />}></Route>
+        <Route path='mesReservations' element={<Reservation />}></Route>
       </Route>
       <Route path="/login" element={<Login />} />
 

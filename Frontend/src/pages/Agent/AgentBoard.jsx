@@ -43,7 +43,7 @@ function AgentBoard() {
                 <h1 className='text-2xl font-bold'>Tableau de Bord Agent</h1>
                 <h2 className='text-gray-500'>Vue d'ensemble de vos locations</h2>
             </div>
-            <div className='grid grid-cols-2 gap-8 p-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-8 p-5'>
                 <InfoCard nom="Mes Réservations" nombre={stats.reservations} src={carlouer}></InfoCard>
                 <InfoCard nom="Véhicules Disponibles" nombre={stats.vehicules} src={carDispo}></InfoCard>
             </div>
