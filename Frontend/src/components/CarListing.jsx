@@ -39,7 +39,7 @@ export default function CarListing() {
     
   }, []);
   return (
-    <div className="min-h-screen bg-[#f7f8fa]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="min-h-screen bg-[#f7f8fa] p-20" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
         * { font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
