@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 import schemas,models
+from hashing import _hash
 
 
 router = APIRouter(prefix="/api/retours", tags=["Retours"])
@@ -33,7 +34,7 @@ def create_retour(request: schemas.RetourCreate, db: Session = Depends(get_db)):
     if not reservation:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cette reservation n'existe pas")
    
-    id_retour = hash(str(request.id_reservation) + str(request.frais_supplementaire))
+    id_retour = _hash(str(request.id_reservation) + str(request.frais_supplementaire))
     new_retour = models.Retour(    
         id_retour = id_retour,
         id_reservation =request.id_reservation,      

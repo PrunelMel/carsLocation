@@ -32,10 +32,13 @@ const LoginPage = () => {
         const data = await apiService.loginClient(loginFormData)
         console.log(loginFormData)
         console.log(data)
-        if(data.ok){
-          localStorage.setItem('userEmail', loginFormData.email)
+        
+        if(data.email){
+          console.log("succes login")
+          localStorage.setItem('userEmail', data.email)
+          localStorage.setItem('clientDrixenvaId', data.id_user)
           localStorage.setItem('clientRole', 'client')
-          window.location.href = '/home/cars'
+          window.location.href = '/home/mesReservations'
         }
       }
       else{
@@ -51,7 +54,7 @@ const LoginPage = () => {
     }
   }
   return (
-    <div className="min-h-screen flex w-full font-sans bg-white">
+    <div className="min-h-screen flex w-full font-sans bg-white p-10">
       {/* Left side (Image & Branding) */}
       <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12 overflow-hidden bg-slate-900">
         {/* Background Image Overlay */}

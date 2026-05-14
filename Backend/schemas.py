@@ -4,13 +4,24 @@ from typing import Optional
 from enum import Enum
 
 
-
 # ENUMS 
 
 class RoleEnum(str, Enum):
     agent = "agent"
     admin = "admin"
 
+#login
+
+class ClientLoginResponse(BaseModel):
+    id_user: str
+    email: str
+    detail:str
+    
+class UserLoginResponse(BaseModel):
+    id_user: str
+    email: str
+    role: RoleEnum
+    detail:str
 
 class ModePaiementEnum(str, Enum):
     carte = "carte"
@@ -141,7 +152,7 @@ class ShowVehicule(BaseModel):
 # RESERVATION
 
 class ReservationCreate(BaseModel):
-        # id_reservation: str = Field(..., max_length=50)
+    # id_reservation: str = Field(..., max_length=50)
     date_debut: date
     date_fin: date
     date_reservation: Optional[date] = None
@@ -149,7 +160,7 @@ class ReservationCreate(BaseModel):
     status: StatusReservationEnum = Field(default=StatusReservationEnum.en_attente)
     id_client: str = Field(..., max_length=50)
     id_vehicule: str = Field(..., max_length=50)
-    id_user: str = Field(..., max_length=50)
+    id_user:Optional[str] = Field(default="agent1")
 
    
 

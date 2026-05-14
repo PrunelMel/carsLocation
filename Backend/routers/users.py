@@ -4,7 +4,7 @@ from database import get_db
 import schemas
 from sqlalchemy.orm import Session
 from typing import List
-from hashing import hash_password
+from hashing import _hash, hash_password
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
@@ -37,7 +37,7 @@ def create_user(request : schemas.UtilisateurCreate,db : Session = Depends(get_d
         admin = db.query(models.Utilisateur).filter(models.Utilisateur.id_user == request.id_admin).first()
         if not admin:
             raise HTTPException(404, "Cet admin n'existe pas")
-    id_user = hash(str(request.email))
+    id_user = _hash(str(request.email))
     new_user = models.Utilisateur(
         id_user = id_user,
         nom = request.nom,
@@ -77,10 +77,10 @@ def update_user(id_user: str, request: schemas.UtilisateurCreate, db: Session = 
         )
     request.mot_de_passe = hash_password(request.mot_de_passe)
 
-    update_data = request.model_dump(exclude={"id_user","id_admin"})
+    update_data = request.model_dump(exclude={"id_user"})
     for key, value in update_data.items():
         setattr(user, key, value)
 
     db.commit()
     db.refresh(user)
-    return {"Message":f"{request.id_user} mise à jour avec succès"}     
+    return {"Utilisateur mise à jour avec succès"}     

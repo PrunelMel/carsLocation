@@ -1,8 +1,54 @@
 import {motion} from "framer-motion"
 import { useState } from "react"
 import { StarIcon, GearIcon, HeartIcon, SeatsIcon, BoltIcon, RouteIcon } from "./icons/icons";
+import { apiService } from "../services/api";
+const id_client = localStorage.getItem('clientDrixenvaId')
 function CarCard({ car, index }) {
+  function formaterDatePrecise(date) {
+    const annee = date.getFullYear();
+    const mois = String(date.getMonth() + 1).padStart(2, '0');
+    const jour = String(date.getDate()).padStart(2, '0');
+    
+    return `${annee}-${mois}-${jour}`; 
+}
   const [liked, setLiked] = useState(false);
+  const handleReserve = async () => {
+    if(id_client){
+      try{
+        console.log("Reserving", car)
+        confirm("Voulez-vous vraiment reserver ce vehicule ?")
+        const date = new Date()
+        const retour = new Date(date.getTime())
+        retour.setDate(retour.getDate() + 3)
+        console.log("date reserve", formaterDatePrecise(date))
+        console.log("data retour", formaterDatePrecise(retour))
+        const vehiculeReserve = {
+          date_debut:formaterDatePrecise(date),
+          date_fin:formaterDatePrecise(retour),
+          montant_total:car.prix_par_jour * 3,
+          status:"confirmee",
+          id_client:id_client,
+          id_vehicule:car.id_vehicule,
+          // id_user:car.id_user,
+        }
+        console.log(vehiculeReserve)
+        const res = await apiService.createReservations(vehiculeReserve)
+        console.log(res)
+        const res2 = await apiService.updateVehicules(car.id_vehicule,  {marque:car.marque, modele:car.modele, carburant:car.carburant, prix_par_jour:car.prix_par_jour, status:"louer"})
+        console.log(res2) 
+      }
+      catch(e){
+        alert("Erreur lors de la reservation : " + e.message)
+        console.log(e)
+      }
+
+    }
+    else{
+      alert("Veuillez vous connecter")
+      window.location.href = '/login'
+    }
+    
+  }
 
   return (
     <motion.div
@@ -23,12 +69,12 @@ function CarCard({ car, index }) {
 
         {/* Dispo badge */}
         <div className={`absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold backdrop-blur-sm
-          ${car.status
+          ${car.status === "disponible"
             ? "bg-emerald-500/90 text-white"
-            : "bg-gray-600/80 text-white"}`}
+            : "bg-red-600/80 text-white"}`}
         >
           <span className={`w-1.5 h-1.5 rounded-full ${car.status ? "bg-white" : "bg-gray-300"}`} />
-          {car.status ? "Disponible" : "Indisponible"}
+          {car.status === "disponible" ? "Disponible" : "Indisponible"}
         </div>
 
         {/* Like */}
@@ -82,11 +128,12 @@ function CarCard({ car, index }) {
             Détails
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            disabled={!car.available}
+            // whileHover={{ scale: 1.02 }}
+            // whileTap={{ scale: 0.97 }}
+            disabled={car.status === "disponible" ? false : true}
+            onClick={handleReserve}
             className={`flex-1 py-2.5 rounded-xl text-[13px] font-semibold transition-all
-              ${car.status
+              ${car.status === "disponible"
                 ? "bg-blue-600 hover:bg-blue-700 text-white shadow-[0_4px_14px_rgba(37,99,235,0.35)]"
                 : "bg-gray-100 text-gray-400 cursor-not-allowed"}`}
           >

@@ -5,7 +5,7 @@ from database import get_db
 import schemas
 from sqlalchemy.orm import Session
 from typing import List
-from hashing import hash_password
+from hashing import hash_password, _hash
 
 
 router = APIRouter(prefix="/api/clients",tags=["clients"])
@@ -30,7 +30,7 @@ def get_client_by_id(id_client:str,db : Session = Depends(get_db)):
 # Créer un nouveau Client
 @router.post("/", status_code=status.HTTP_201_CREATED,response_model=schemas.ShowClient)
 def create_client(request : schemas.ClientCreate, db : Session = Depends(get_db)):
-    id_client = hash(request.email)
+    id_client = _hash(request.email)
     new_client = models.Client(
         id_client = id_client,
         nom = request.nom,
