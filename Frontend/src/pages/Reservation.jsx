@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { apiService } from '../services/api';
 import { 
   Car, 
   Calendar, 
@@ -11,42 +12,29 @@ import {
   TrendingUp,
   History
 } from 'lucide-react';
+import {motion} from "framer-motion"
+const id_client = localStorage.getItem('clientDrixenvaId')
 
 const Reservation = () => {
   // Dummy data
-  const reservations = [
-    {
-      id: 1,
-      vehicle: "Porsche Taycan 4S",
-      image: "/taycan.png",
-      startDate: "12 Mai 2026",
-      endDate: "15 Mai 2026",
-      price: "540€",
-      status: "Active",
-      returnStatus: "Non retourné",
-    },
-    {
-      id: 2,
-      vehicle: "BMW M4 Competition",
-      image: "/m4.png",
-      startDate: "05 Mai 2026",
-      endDate: "07 Mai 2026",
-      price: "420€",
-      status: "Terminée",
-      returnStatus: "Véhicule rendu",
-    },
-    {
-      id: 3,
-      vehicle: "Audi RS6 Avant",
-      image: "https:loginFormData//images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=700&q=85&auto=format",
-      startDate: "01 Mai 2026",
-      endDate: "03 Mai 2026",
-      price: "390€",
-      status: "Annulée",
-      returnStatus: "N/A",
-    }
-  ];
+  const handleCancel = async (r) => {
+    console.log('Annulation de Réservation')
+    if(id_client){
+      setIsDeleting(true);
 
+      const res = await apiService.deleteReservation(r.id_reservation)
+      console.log(res)
+      console.log(r)
+      const res2 = await apiService.updateVehicules(r.vehicle.id_vehicule,  {marque:r.vehicle.marque, modele:r.vehicle.modele, carburant:r.vehicle.carburant, prix_par_jour:r.vehicle.prix_par_jour, status:"disponible"} )
+      console.log(res2)
+    }else{
+      alert("Veuillez vous connecter")
+      window.location.href = '/login'
+    }
+    setIsDeleting(false);
+  }
+
+  
   const stats = [
     { title: "Réservations actives", count: 1, icon: <Clock size={20} className="text-blue-600" />, color: "bg-blue-50" },
     { title: "Véhicules retournés", count: 1, icon: <CheckCircle2 size={20} className="text-emerald-600" />, color: "bg-emerald-50" },
@@ -58,6 +46,7 @@ const Reservation = () => {
       case 'Active': return 'bg-blue-100 text-blue-700';
       case 'Terminée': return 'bg-emerald-100 text-emerald-700';
       case 'Annulée': return 'bg-gray-100 text-gray-700';
+      case 'confirmee': return 'bg-green-100 text-green-700';
       default: return 'bg-gray-100 text-gray-700';
     }
   };
@@ -65,9 +54,26 @@ const Reservation = () => {
   const getReturnStatusColor = (status) => {
     if (status === 'Véhicule rendu') return 'bg-emerald-100 text-emerald-700';
     if (status === 'Non retourné') return 'bg-rose-100 text-rose-700';
+    if (status === 'louer') return 'bg-blue-100 text-blue-700';
     return 'bg-gray-100 text-gray-600';
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await apiService.getClientReservations(id_client);
+      console.log(data);
+      setRes(data);
+    }
+    if (id_client) {
+      fetchData();
+    }
+    else {
+      window.location.href = '/home/login'
+    }
+  }, []);
+
+  const [res, setRes] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(false);
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 p-20">
       {/* Navbar */}
@@ -111,21 +117,21 @@ const Reservation = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-slate-500">{stat.title}</p>
-                <p className="text-2xl font-bold">{stat.count}</p>
+                <p className="text-2xl font-bold">{res.length}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Reservations List */}
-        <div className="space-y-6">
-          {reservations.map((res) => (
-            <div key={res.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all hover:shadow-md">
+        { res.length > 0 ? (<div className="space-y-6">
+          {res.map((res) => (
+            <div key={res.id_reservation} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden transition-all hover:shadow-md">
               <div className="flex flex-col md:flex-row">
                 {/* Vehicle Image */}
                 <div className="w-full md:w-64 h-48 md:h-auto bg-slate-100 overflow-hidden">
                   <img 
-                    src={res.image} 
+                    src={res.vehicule.img} 
                     alt={res.vehicle} 
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -135,14 +141,14 @@ const Reservation = () => {
                 <div className="flex-1 p-6 flex flex-col justify-between">
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-                      <h3 className="text-xl font-bold">{res.vehicle}</h3>
+                      <h3 className="text-xl font-bold">{res.vehicule.marque + ' ' + res.vehicule.modele}</h3>
                       <div className="flex gap-2">
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${getStatusColor(res.status)}`}>
                           {res.status}
                         </span>
-                        {res.status !== 'Annulée' && (
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${getReturnStatusColor(res.returnStatus)}`}>
-                            {res.returnStatus}
+                        {res.vehicule.status !== 'Annulée' && (
+                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${getReturnStatusColor(res.vehicule.status)}`}>
+                            {res.vehicule.status}
                           </span>
                         )}
                       </div>
@@ -153,34 +159,61 @@ const Reservation = () => {
                         <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Date début</p>
                         <div className="flex items-center gap-2 text-slate-700">
                           <Calendar size={16} className="text-slate-400" />
-                          <span className="font-medium">{res.startDate}</span>
+                          <span className="font-medium">{new Date(res.date_debut).toLocaleDateString('fr-FR')}</span>
                         </div>
                       </div>
                       <div className="space-y-1">
                         <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Date retour</p>
                         <div className="flex items-center gap-2 text-slate-700">
                           <Calendar size={16} className="text-slate-400" />
-                          <span className="font-medium">{res.endDate}</span>
+                          <span className="font-medium">{new Date(res.date_fin).toLocaleDateString('fr-FR')}</span>
                         </div>
                       </div>
                       <div className="space-y-1">
                         <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Prix total</p>
-                        <p className="text-lg font-bold text-blue-600">{res.price}</p>
+                        <p className="text-lg font-bold text-blue-600">{res.montant_total}</p>
                       </div>
+                      
                     </div>
                   </div>
-
+                  {/* bouton d' annulation de réservation  */}
+                  
                   <div className="mt-8 flex justify-end">
+                    <button onClick={() => handleCancel(res)}  className="flex items-center gap-2 text-sm font-bold text-red-600 hover:gap-3 transition-all">
+                      Annuler la reservation
+                      <ArrowRight size={18} />
+                    </button>
+                  </div>
+                  
+
+                  {/* <div className="mt-8 flex justify-end">
                     <button className="flex items-center gap-2 text-sm font-bold text-blue-600 hover:gap-3 transition-all">
                       Voir détails
                       <ArrowRight size={18} />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           ))}
-        </div>
+        </div>): 
+        (
+          <motion.div
+            key="empty"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center justify-center py-24 text-center"
+          >
+            <div className="w-16 h-16 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="1.8" strokeLinecap="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <p className="text-gray-500 font-semibold text-lg mb-1">Aucune réservation trouvée</p>
+            <p className="text-gray-400 text-sm">Essayez encore</p>
+          </motion.div>
+        )}
       </main>
     </div>
   );

@@ -120,6 +120,7 @@ export const apiService = {
     createReservations: (data) => create("reservations", data), 
     updateReservation: (id, data) => update(`reservations/${id}`, data),
     deleteReservation: (id) => supprimer("reservations", id),
+    getClientReservations: (id) => fetchAll(`reservations/client/${id}`),
     //Operations sur paiements
     getPaiements: () => fetchAll("paiements"),
     createPaiements: (data) => create("paiements", data),
