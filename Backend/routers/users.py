@@ -77,7 +77,7 @@ def update_user(id_user: str, request: schemas.UtilisateurCreate, db: Session = 
         )
     request.mot_de_passe = hash_password(request.mot_de_passe)
 
-    update_data = request.model_dump(exclude={"id_user","id_admin"})
+    update_data = request.model_dump(exclude={"id_user"})
     for key, value in update_data.items():
         setattr(user, key, value)
 
