@@ -3,6 +3,7 @@ from typing import List
 from database import get_db
 from sqlalchemy.orm import Session
 import schemas, models
+from hashing import _hash
 
 router = APIRouter(prefix="/api/reservations", tags=["Reservations"])
 
@@ -10,6 +11,16 @@ router = APIRouter(prefix="/api/reservations", tags=["Reservations"])
 @router.get("/", response_model=List[schemas.ReservationDetail])
 def get_all_reservation(db: Session = Depends(get_db)):
     reservations = db.query(models.Reservation).all()
+    if not reservations:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Aucune reservation trouvée")
+    return reservations
+
+
+@router.get("/client/{id_client}", response_model=List[schemas.ReservationDetail])
+def get_reservation_by_client(id_client: str, db: Session = Depends(get_db)):
+    reservations = db.query(models.Reservation).filter(
+        models.Reservation.id_client == id_client
+    ).all()
     if not reservations:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Aucune reservation trouvée")
     return reservations
@@ -37,14 +48,13 @@ def create_reservation(request: schemas.ReservationCreate, db: Session = Depends
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Ce vehicule n'existe pas")
     if not agent:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Cet agent n'existe pas")
-    id_reservation = hash(str(request.id_client) + str(request.id_vehicule))
+    id_reservation = _hash(str(request.id_client) + str(request.id_vehicule))
     new_reservation = models.Reservation(
         id_reservation=id_reservation,
         date_debut=request.date_debut,
         date_fin=request.date_fin,
         date_reservation=request.date_reservation,
         montant_total=request.montant_total,
-        # CORRECTION : inclure status (présent dans le model et le schéma)
         status=request.status,
         id_client=request.id_client,
         id_vehicule=request.id_vehicule,

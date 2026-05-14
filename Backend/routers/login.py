@@ -4,11 +4,12 @@ from database import get_db
 import schemas
 from sqlalchemy.orm import Session
 from hashing import verify_password
+from fastapi import Response
 
 router = APIRouter(prefix="/api/login", tags=["login"])
 
 
-@router.post("/", status_code=status.HTTP_200_OK)
+@router.post("/", status_code=status.HTTP_200_OK, response_model=schemas.ClientLoginResponse | schemas.UserLoginResponse)
 def login(request: schemas.UserLogin | schemas.ClientLogin, db: Session = Depends(get_db)):
 
     if isinstance(request, schemas.UserLogin):
@@ -31,7 +32,7 @@ def login(request: schemas.UserLogin | schemas.ClientLogin, db: Session = Depend
                 detail="Mot de passe incorrect"
             )
 
-        return {"detail": "Utilisateur valide", "role": user.role, "id": user.id_user}
+        return {"detail": "Utilisateur valide", "role": user.role, "id_user": user.id_user, "email": user.email}
 
     else:
         # CORRECTION : vérifier que le client existe avant d'appeler verify_password
@@ -49,4 +50,4 @@ def login(request: schemas.UserLogin | schemas.ClientLogin, db: Session = Depend
                 detail="Mot de passe incorrect"
             )
 
-        return {"detail": "Client valide", "id": client.id_client}
+        return    {"detail": "Client valide", "id_user": client.id_client, "email": client.email}

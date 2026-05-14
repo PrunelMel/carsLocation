@@ -4,7 +4,7 @@ from database import get_db
 import schemas
 from sqlalchemy.orm import Session
 from typing import List
-from hashing import hash_password
+from hashing import _hash
 
 router = APIRouter(prefix="/api/users", tags=["Users"])
 
@@ -37,7 +37,7 @@ def create_user(request : schemas.UtilisateurCreate,db : Session = Depends(get_d
         admin = db.query(models.Utilisateur).filter(models.Utilisateur.id_user == request.id_admin).first()
         if not admin:
             raise HTTPException(404, "Cet admin n'existe pas")
-    id_user = hash(str(request.email))
+    id_user = _hash(str(request.email))
     new_user = models.Utilisateur(
         id_user = id_user,
         nom = request.nom,
