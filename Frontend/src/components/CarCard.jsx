@@ -13,31 +13,39 @@ function CarCard({ car, index }) {
 }
   const [liked, setLiked] = useState(false);
   const handleReserve = async () => {
-    try{
-      console.log("Reserving", car)
-      confirm("Voulez-vous vraiment reserver ce vehicule ?")
-      const date = new Date()
-      const retour = new Date(date.getTime())
-      retour.setDate(retour.getDate() + 3)
-      console.log("date reserve", formaterDatePrecise(date))
-      console.log("data retour", formaterDatePrecise(retour))
-      const vehiculeReserve = {
-        date_debut:formaterDatePrecise(date),
-        date_fin:formaterDatePrecise(retour),
-        montant_total:car.prix_par_jour * 3,
-        status:"confirmee",
-        id_client:id_client,
-        id_vehicule:car.id_vehicule,
-        // id_user:car.id_user,
+    if(id_client){
+      try{
+        console.log("Reserving", car)
+        confirm("Voulez-vous vraiment reserver ce vehicule ?")
+        const date = new Date()
+        const retour = new Date(date.getTime())
+        retour.setDate(retour.getDate() + 3)
+        console.log("date reserve", formaterDatePrecise(date))
+        console.log("data retour", formaterDatePrecise(retour))
+        const vehiculeReserve = {
+          date_debut:formaterDatePrecise(date),
+          date_fin:formaterDatePrecise(retour),
+          montant_total:car.prix_par_jour * 3,
+          status:"confirmee",
+          id_client:id_client,
+          id_vehicule:car.id_vehicule,
+          // id_user:car.id_user,
+        }
+        console.log(vehiculeReserve)
+        const res = await apiService.createReservations(vehiculeReserve)
+        console.log(res)
+        const res2 = await apiService.updateVehicules(car.id_vehicule,  {marque:car.marque, modele:car.modele, carburant:car.carburant, prix_par_jour:car.prix_par_jour, status:"louer"})
+        console.log(res2) 
       }
-      console.log(vehiculeReserve)
-      const res = await apiService.createReservations(vehiculeReserve)
-      console.log(res)
-      const res2 = await apiService.updateVehicules(car.id_vehicule,  {marque:car.marque, modele:car.modele, carburant:car.carburant, prix_par_jour:car.prix_par_jour, status:"louer"})
-      console.log(res2) 
+      catch(e){
+        alert("Erreur lors de la reservation : " + e.message)
+        console.log(e)
+      }
+
     }
-    catch(e){
-      console.log(e)
+    else{
+      alert("Veuillez vous connecter")
+      window.location.href = '/login'
     }
     
   }
@@ -122,7 +130,7 @@ function CarCard({ car, index }) {
           <motion.button
             // whileHover={{ scale: 1.02 }}
             // whileTap={{ scale: 0.97 }}
-            disabled={!car.status}
+            disabled={car.status === "disponible" ? false : true}
             onClick={handleReserve}
             className={`flex-1 py-2.5 rounded-xl text-[13px] font-semibold transition-all
               ${car.status === "disponible"
