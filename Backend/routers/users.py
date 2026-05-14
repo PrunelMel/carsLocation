@@ -83,4 +83,4 @@ def update_user(id_user: str, request: schemas.UtilisateurCreate, db: Session = 
 
     db.commit()
     db.refresh(user)
-    return {"Message":f"{request.id_user} mise à jour avec succès"}     
+    return {"Utilisateur mise à jour avec succès"}     
