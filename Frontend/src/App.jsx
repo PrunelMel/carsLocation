@@ -43,10 +43,10 @@ function App() {
       <Route path="/home" element={<ClientLayout />}>
         <Route index element={<Home />} />
         <Route path="cars" element={<CarListing />}></Route>
-        <Route path='loginclient' element={<ClientLogin />}></Route>
         <Route path='mesReservations' element={<Reservation />}></Route>
       </Route>
       <Route path="/login" element={<Login />} />
+      <Route path='loginclient' element={<ClientLogin />}></Route>
 
       {/* Routes Admin */}
       <Route path="/admin" element={<RequireAuth role="admin"><AdminLayout /></RequireAuth>}>

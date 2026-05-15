@@ -6,9 +6,10 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Utiliser nomClient (la clé réellement stockée au login)
     const nomClient = localStorage.getItem("nomClient");
     if (nomClient) {
-      navigate("/home");
+      navigate("/home/mesReservations");
     }
   }, []);
 

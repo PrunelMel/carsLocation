@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import CarCard from "./CarCard";
 import { apiService } from "../services/api";
 
-
+// Filtres par carburant — construits à partir des vraies données API
+// On garde une liste fixe de pills connues + "Tous"
 const CARBURANT_FILTERS = ["Tous", "Essence", "Diesel", "Électrique", "Hybride"];
 
 export default function CarListing() {
@@ -11,10 +12,11 @@ export default function CarListing() {
   const [loading, setLoading]       = useState(true);
 
   // Filtres
-  const [activeFilter, setActiveFilter] = useState("Tous"); 
-  const [showOnly, setShowOnly]         = useState("all");     
-  const [sortBy, setSortBy]             = useState("default"); 
+  const [activeFilter, setActiveFilter] = useState("Tous");   // carburant
+  const [showOnly, setShowOnly]         = useState("all");     // disponibilité
+  const [sortBy, setSortBy]             = useState("default"); // tri prix
 
+  // ── Fetch ────────────────────────────────────────────────────────────────
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,6 +31,7 @@ export default function CarListing() {
     fetchData();
   }, []);
 
+  // ── Logique de filtrage + tri (mémoïsée) ─────────────────────────────────
   const filtered = useMemo(() => {
     let result = [...cars];
 
@@ -53,11 +56,13 @@ export default function CarListing() {
     return result;
   }, [cars, activeFilter, showOnly, sortBy]);
 
+  // ── Compteurs pour les pills ─────────────────────────────────────────────
   function countCarburant(label) {
     if (label === "Tous") return cars.length;
     return cars.filter(c => c.carburant?.toLowerCase() === label.toLowerCase()).length;
   }
 
+  // ── Rendu ─────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-[#f7f8fa]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`
@@ -70,7 +75,7 @@ export default function CarListing() {
 
       <div className="max-w-7xl mx-auto px-6 py-14">
 
-      
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,14 +93,14 @@ export default function CarListing() {
           </p>
         </motion.div>
 
-        
+        {/* ── Controls ── */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex flex-col gap-4 mb-8"
         >
-       
+          {/* Pills carburant */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1">
             {CARBURANT_FILTERS.map(f => {
               const count = countCarburant(f);
@@ -121,7 +126,9 @@ export default function CarListing() {
             })}
           </div>
 
+          {/* Selects disponibilité + tri */}
           <div className="flex items-center gap-3 flex-wrap">
+            {/* Disponibilité */}
             <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round">
                 <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/>
@@ -169,6 +176,7 @@ export default function CarListing() {
           </div>
         </motion.div>
 
+        {/* ── Grille ── */}
         <AnimatePresence mode="popLayout">
           {loading ? (
             <motion.div

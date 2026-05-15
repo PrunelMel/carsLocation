@@ -7,9 +7,9 @@ import {
 import { StarIcon, GearIcon, HeartIcon, BoltIcon } from "./icons/icons";
 import { apiService } from "../services/api";
 
-
+// ─────────────────────────────────────────────────────────────────────────────
 // Modal Détails
-
+// ─────────────────────────────────────────────────────────────────────────────
 
 const STATUS_STYLE = {
   disponible:  { label: "Disponible",   cls: "bg-emerald-100 text-emerald-700" },
@@ -130,9 +130,9 @@ function DetailsModal({ car, onClose, onReserver }) {
   );
 }
 
-
+// ─────────────────────────────────────────────────────────────────────────────
 // Modal Réservation
-
+// ─────────────────────────────────────────────────────────────────────────────
 
 function ReservationModal({ car, onClose }) {
   const idClient = localStorage.getItem("idClient");
@@ -301,9 +301,9 @@ function ReservationModal({ car, onClose }) {
   );
 }
 
-
+// ─────────────────────────────────────────────────────────────────────────────
 // CarCard
-
+// ─────────────────────────────────────────────────────────────────────────────
 
 function CarCard({ car, index }) {
   const [liked,        setLiked]        = useState(false);

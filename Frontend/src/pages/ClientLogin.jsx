@@ -33,20 +33,19 @@ const LoginPage = () => {
         const reponse = await apiService.loginClient(loginFormData);
         if (reponse.ok) {
           const data = await reponse.json();
-          // Stocker le nom ET l'id du client pour les réservations
           localStorage.setItem("nomClient", data.nom);
           localStorage.setItem("idClient", data.id);
           navigate("/home");
         } else {
-          setError( "Email ou mot de passe incorrect.");
+          setError("Email ou mot de passe incorrect.");
         }
       } else {
         const reponse = await apiService.createClient(RegisterformData);
-        if (reponse.ok ) {
+        if (reponse.ok) {
           setSuccess("Compte créé avec succès ! Vous pouvez maintenant vous connecter.");
           setActiveTab('login');
         } else {
-          setError( "Erreur lors de l'inscription.");
+          setError("Erreur lors de l'inscription.");
         }
       }
     } catch (e) {
@@ -58,6 +57,8 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex w-full font-sans bg-gray-50 justify-center">
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-24 relative">
+        <a href="/home" className='text-gray-500 font-semibold pb-5 hover:text-gray-700 transition-colors-'>Retourner à l'accueil</a>
+
         <div className="w-full max-w-md">
           {/* Tabs */}
           <div className="flex border-b border-gray-200 mb-8">
