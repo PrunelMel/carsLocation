@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { apiService } from '../services/api';
 
-// ── helpers ────────────────────────────────────────────────────────────────
 
 const STATUS_META = {
   en_attente: { label: 'En attente',  color: 'bg-blue-100 text-blue-700',      dot: 'bg-blue-500'    },
@@ -33,7 +32,6 @@ function nbJours(debut, fin) {
   return d > 0 ? d : 0;
 }
 
-// ── Carte réservation ──────────────────────────────────────────────────────
 
 function ReservationCard({ r }) {
   const [open, setOpen] = useState(false);
@@ -130,7 +128,6 @@ function ReservationCard({ r }) {
   );
 }
 
-// ── Composant principal ────────────────────────────────────────────────────
 
 const FILTRES = [
   { key: 'toutes',     label: 'Toutes'     },

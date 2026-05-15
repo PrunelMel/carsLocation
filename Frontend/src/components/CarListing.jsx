@@ -70,7 +70,7 @@ export default function CarListing() {
 
       <div className="max-w-7xl mx-auto px-6 py-14">
 
-        {/* ── Header ── */}
+      
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
