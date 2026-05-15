@@ -26,6 +26,7 @@ function Login() {
     setLoading(true)
     try {
       const response = await apiService.loginUtilisateur(formData)
+      
       localStorage.setItem('userEmail', formData.email)
       localStorage.setItem('userRole', formData.role)
       localStorage.setItem('userId', response.id)

@@ -125,7 +125,7 @@ function Parking() {
       <Navbar />
 
     
-      <div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between p-5'>
+      <div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between p-10 pt-20'>
         <div>
           <h1 className='text-2xl font-bold'>Gestion du Parking</h1>
           <h2 className='text-gray-500'>Ajoutez, modifiez ou supprimez des véhicules</h2>

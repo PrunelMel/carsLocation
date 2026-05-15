@@ -137,7 +137,7 @@ function Agents() {
     <div className='bg-gray-100 min-h-screen'>
       <Navbar />
 
-      <div className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between m-5'>
+      <div className='flex flex-col gap-4 md:flex-row md:items-center md:justify-between m-5 pt-20'>
         <div>
           <h1 className='text-2xl font-semibold'>Gestion des Agents</h1>
           <p className='text-gray-500 text-sm'>{agents.length} agent{agents.length !== 1 ? 's' : ''} enregistré{agents.length !== 1 ? 's' : ''}</p>

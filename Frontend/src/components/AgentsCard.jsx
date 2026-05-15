@@ -24,7 +24,7 @@ function AgentCard({ nom = '', prenom = '', email = '' }) {
 
 function AgentsCard({ agents = [] }) {
   return (
-    <div className='bg-white rounded-xl shadow-[0_0_5px_0_rgba(0,0,0,0.2)] p-5'>
+    <div className='bg-white rounded-xl shadow-[0_0_5px_0_rgba(0,0,0,0.2)]'>
       <h1 className='text-lg font-bold mb-3'>Agents ({agents.length})</h1>
       <div className='flex flex-col gap-3'>
         {agents.length === 0

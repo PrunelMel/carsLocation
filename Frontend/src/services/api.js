@@ -1,4 +1,4 @@
-const Base_URL = "http://localhost:3000/api/";
+const Base_URL = "http://localhost:8000/api/";
 
 const fetchAll = async (endpoint) => {
     try {
@@ -93,7 +93,7 @@ const login = async (endpoint, data) => {
                 throw new Error(erreur.detail);
         }
        
-        return  response 
+        return  await response.json()
     } catch (error) {
         console.error(error)
         throw error

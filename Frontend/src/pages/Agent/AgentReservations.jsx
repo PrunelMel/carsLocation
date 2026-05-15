@@ -37,7 +37,8 @@ function AgentReservations() {
       } catch (err) {
         console.error('Erreur lors de la récupération des réservations :', err.message)
       } finally {
-        setLoading(false)
+        setTimeout(() => setLoading(false), 1000)
+        // setLoading(false)
       }
     }
     fetchReservations()
@@ -51,7 +52,7 @@ function AgentReservations() {
   return (
     <div className='bg-gray-100 min-h-screen'>
       <Navbar />
-      <div className='p-5'>
+      <div className='p-5 pt-28'>
         <h1 className='text-2xl font-bold'>Mes Réservations</h1>
         <h2 className='text-gray-500'>Historique et suivi de vos locations</h2>
       </div>
@@ -65,7 +66,7 @@ function AgentReservations() {
       {loading ? (
         <div className='p-5 text-center text-gray-500'>Chargement...</div>
       ) : reservationsFiltrees.length === 0 ? (
-        <div className='p-5 text-center text-gray-500'>Aucune réservation trouvée</div>
+        <div className='p-5 pt-10 text-center text-gray-500'>Aucune réservation trouvée</div>
       ) : (
         <div className='p-5'>
           <div className='overflow-x-auto bg-white rounded-lg shadow'>

@@ -12,10 +12,13 @@ function AgentParkingVehicles() {
             try {
                 const data = await apiService.getVehicules()
                 setVehicules(data)
-                setLoading(false)
+                // setLoading(false)
             } catch (err) {
                 console.error('Erreur lors de la récupération des véhicules:', err.message)
                 setLoading(false)
+            }
+            finally{
+                setTimeout(() => setLoading(false), 1000)
             }
         }
         
@@ -38,7 +41,7 @@ function AgentParkingVehicles() {
     return (
         <div className='bg-gray-100 min-h-screen'>
             <Navbar></Navbar>
-            <div className='p-5'>
+            <div className='p-5 pt-28'>
                 <h1 className='text-2xl font-bold'>Véhicules du Parking</h1>
                 <h2 className='text-gray-500'>Liste des véhicules disponibles et loués</h2>
             </div>

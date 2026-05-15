@@ -94,7 +94,7 @@ function Locations() {
       : reservations.filter(r => r.status === filterStatus)
 
   return (
-    <div className='bg-gray-100 min-h-screen'>
+    <div className='bg-gray-100 min-h-screen pt-20'>
       <Navbar />
       <div className='p-5'>
         <h1 className='text-2xl font-bold'>Gestion des Locations</h1>

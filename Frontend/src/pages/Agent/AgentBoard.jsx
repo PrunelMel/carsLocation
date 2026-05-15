@@ -31,6 +31,7 @@ function AgentBoard() {
             } catch (err) {
                 console.error(err.message)
             }
+            
         }
         
         fetchData()
@@ -39,7 +40,7 @@ function AgentBoard() {
     return (
         <div className='bg-gray-100 min-h-screen'>
             <Navbar></Navbar>
-            <div className='p-5'>
+            <div className='p-5 pt-28'>
                 <h1 className='text-2xl font-bold'>Tableau de Bord Agent</h1>
                 <h2 className='text-gray-500'>Vue d'ensemble de vos locations</h2>
             </div>

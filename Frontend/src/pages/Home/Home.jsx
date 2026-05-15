@@ -1,7 +1,7 @@
 import CarListing from "../../components/CarListing";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
+import HeroSection from "./HeroSection";
 const Home = () => {
   const navigate = useNavigate();
 
@@ -15,6 +15,7 @@ const Home = () => {
 
   return (
     <>
+      <HeroSection />
       <CarListing />
     </>
   );
