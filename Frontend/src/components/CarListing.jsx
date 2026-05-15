@@ -56,13 +56,11 @@ export default function CarListing() {
     return result;
   }, [cars, activeFilter, showOnly, sortBy]);
 
-  // ── Compteurs pour les pills ─────────────────────────────────────────────
   function countCarburant(label) {
     if (label === "Tous") return cars.length;
     return cars.filter(c => c.carburant?.toLowerCase() === label.toLowerCase()).length;
   }
 
-  // ── Rendu ─────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-[#f7f8fa]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`

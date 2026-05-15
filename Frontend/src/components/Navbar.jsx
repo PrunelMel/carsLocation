@@ -6,8 +6,8 @@ function NavLink({ to, children }) {
   return (
     <Link
       to={to}
-      className="px-3 py-1.5 rounded-lg text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-150"
-    >
+
+      className="px-3 py-1.5 rounded-lg text-sm text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-150"    >
       {children}
     </Link>
   );
@@ -25,14 +25,13 @@ function NavBar() {
   }
 
   return (
-    <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 h-14 bg-white border-b border-slate-200 shadow-sm">
- 
-      {/* Left: brand + links */}
-      <ul className="flex items-center gap-1">
+    <div className='fixed inset-x-0 top-0 z-50 flex flex-col gap-3 p-3 md:flex-row md:items-center md:justify-between bg-white text-gray-500 shadow-sm'>
+     
+      <ul className="flex flex-wrap gap-3 md:gap-4 items-center w-full md:w-auto">
         <li className="mr-6">
           <Link
             to={isAdmin ? "/admin" : "/agent"}
-            className="text-[15px] font-semibold text-blue-600 tracking-tight"
+            className="text-xl text-blue-600 font-semibold "
           >
             {isAdmin ? "Espace Administration" : "Espace Agent"}
           </Link>
@@ -51,29 +50,21 @@ function NavBar() {
             <li><NavLink to="/agent/parking">Parking</NavLink></li>
             <li><NavLink to="/agent/locations">Mes Réservations</NavLink></li>
           </>
-        )}
-      </ul>
- 
-      {/* Right: user + logout */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
-          <img src={hero} alt="" className="w-6 h-6 rounded-full object-cover" />
-          <span className="text-xs font-medium text-slate-600 tracking-wide">
-            {userRole.toUpperCase()}
-          </span>
+        )}</ul>
+      <div className='flex flex-wrap items-center gap-3 justify-between w-full md:w-auto'>
+        <div className='flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200'>
+          <img src={hero} alt="" className='w-8' />
+          <span className='mx-2'>{userRole.toUpperCase()}</span>
         </div>
- 
         <button
           onClick={handleLogout}
-          className="text-sm font-medium text-red-500 hover:text-red-700 transition-colors"
+          className='text-red-500 font-medium hover:text-red-700 transition-colors'
         >
           Se déconnecter
         </button>
       </div>
- 
     </div>
-  );
-
+  )
 }
 
 export default NavBar

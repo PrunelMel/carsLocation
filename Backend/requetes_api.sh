@@ -7,7 +7,7 @@
 set -e  # Arrêter en cas d'erreur
 
 # Configuration
-API_URL="${1:-http://localhost:8000}"
+API_URL="${1:-http://localhost:3000}"
 echo "🚀 Peuplement de la base de données via l'API: $API_URL"
 echo "================================================"
 

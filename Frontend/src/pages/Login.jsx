@@ -26,15 +26,18 @@ function Login() {
     setLoading(true)
     try {
       const response = await apiService.loginUtilisateur(formData)
-      
+      if(response.ok){
+      const data = await response.json()
       localStorage.setItem('userEmail', formData.email)
       localStorage.setItem('userRole', formData.role)
-      localStorage.setItem('userId', response.id)
+      localStorage.setItem('userId', data.id)
       console.log(response.id)
       setSucces('Connecté avec succès')
       setTimeout(() => {
         navigate(formData.role === 'admin' ? '/admin' : '/agent')
-      }, 500)
+      }, 500)}
+      
+     
     } catch (e) {
       console.error(e.message)
       setErreur('Email ou mot de passe incorrect')
