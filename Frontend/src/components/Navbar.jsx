@@ -14,7 +14,7 @@ function NavBar() {
   }
 
   return (
-    <div className='flex flex-col gap-3 p-3 md:flex-row md:items-center md:justify-between bg-white text-gray-500 shadow-sm'>
+    <div className='fixed inset-x-0 top-0 z-50 flex flex-col gap-3 p-3 md:flex-row md:items-center md:justify-between bg-white text-gray-500 shadow-sm'>
       <ul className='flex flex-wrap gap-3 md:gap-4 items-center w-full md:w-auto'>
         {isAdmin ? (
           <>

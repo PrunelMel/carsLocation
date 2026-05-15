@@ -1,21 +1,22 @@
-import HeroSection from "./HeroSection";
 import CarListing from "../../components/CarListing";
 import { useNavigate } from "react-router-dom";
-import { useEffect, React } from "react";
+import { useEffect } from "react";
+
 const Home = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
-    const clientRole = localStorage.getItem('clientRole');
-    if (clientRole) {
-      navigate('/home/mesReservations');
+    const nomClient = localStorage.getItem("nomClient");
+    if (nomClient) {
+      navigate("/home");
     }
-  })
+  }, []);
+
   return (
     <>
-      <HeroSection />
       <CarListing />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

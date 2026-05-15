@@ -11,10 +11,7 @@ const Footer = () => {
         </div>
         {/* Simple links */}
         <nav className="flex flex-wrap justify-center gap-4 text-sm">
-          <a href="/home" className="hover:text-blue-400 transition-colors">À propos</a>
-          <a href="/home/cars" className="hover:text-blue-400 transition-colors">Véhicules</a>
-          <a href="/home" className="hover:text-blue-400 transition-colors">Services</a>
-          <a href="/home" className="hover:text-blue-400 transition-colors">Contact</a>
+          <a href="/home/cars" className="hover:text-blue-400 transition-colors">Cars</a>
         </nav>
         {/* Copyright */}
         <p className="text-xs text-slate-500 mt-4 md:mt-0 text-center md:text-left">

@@ -214,7 +214,7 @@ VEHICULE1=$(curl -s -X POST "$API_URL/api/vehicules/" \
         "carburant": "Diesel",
         "prix_par_jour": 250.0,
         "status": "disponible",
-        "img": "https://example.com/images/dacia-logan.jpg"
+        "img": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&auto=format&fit=crop&q=80"
     }')
 ID_VEHICULE1=$(extract_id "$VEHICULE1" "id_vehicule")
 echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE1"
@@ -229,7 +229,7 @@ VEHICULE2=$(curl -s -X POST "$API_URL/api/vehicules/" \
         "carburant": "Essence",
         "prix_par_jour": 350.0,
         "status": "disponible",
-        "img": "https://example.com/images/renault-clio.jpg"
+        "img": "https://images.pexels.com/photos/3764984/pexels-photo-3764984.jpeg?auto=compress&cs=tinysrgb&w=800"
     }')
 ID_VEHICULE2=$(extract_id "$VEHICULE2" "id_vehicule")
 echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE2"
@@ -244,7 +244,7 @@ VEHICULE3=$(curl -s -X POST "$API_URL/api/vehicules/" \
         "carburant": "Diesel",
         "prix_par_jour": 380.0,
         "status": "louer",
-        "img": "https://example.com/images/peugeot-208.jpg"
+        "img": "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800&auto=format&fit=crop&q=80"
     }')
 ID_VEHICULE3=$(extract_id "$VEHICULE3" "id_vehicule")
 echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE3"
@@ -259,7 +259,7 @@ VEHICULE4=$(curl -s -X POST "$API_URL/api/vehicules/" \
         "carburant": "Diesel",
         "prix_par_jour": 550.0,
         "status": "disponible",
-        "img": "https://example.com/images/hyundai-tucson.jpg"
+        "img": "https://images.pexels.com/photos/1638459/pexels-photo-1638459.jpeg?auto=compress&cs=tinysrgb&w=800"
     }')
 ID_VEHICULE4=$(extract_id "$VEHICULE4" "id_vehicule")
 echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE4"
@@ -274,10 +274,138 @@ VEHICULE5=$(curl -s -X POST "$API_URL/api/vehicules/" \
         "carburant": "Hybride",
         "prix_par_jour": 450.0,
         "status": "maintenance",
-        "img": "https://example.com/images/toyota-corolla.jpg"
+        "img": "https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg?auto=compress&cs=tinysrgb&w=800"
     }')
 ID_VEHICULE5=$(extract_id "$VEHICULE5" "id_vehicule")
 echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE5"
+
+# ── Véhicules supplémentaires : Essence ──────────────────────────────────────
+
+# Véhicule 6 - Peugeot 208 Essence
+echo "  → Création du véhicule Peugeot 208 Essence..."
+VEHICULE6=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Peugeot",
+        "modele": "208",
+        "carburant": "Essence",
+        "prix_par_jour": 360.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1616422285623-13ff0162193c?w=800&auto=format&fit=crop&q=80"
+    }')
+ID_VEHICULE6=$(extract_id "$VEHICULE6" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE6"
+
+# Véhicule 7 - Dacia Sandero Essence
+echo "  → Création du véhicule Dacia Sandero Essence..."
+VEHICULE7=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Dacia",
+        "modele": "Sandero",
+        "carburant": "Essence",
+        "prix_par_jour": 280.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&auto=format&fit=crop&q=80"
+    }')
+ID_VEHICULE7=$(extract_id "$VEHICULE7" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE7"
+
+# ── Véhicules supplémentaires : Diesel ───────────────────────────────────────
+
+# Véhicule 8 - Volkswagen Golf Diesel
+echo "  → Création du véhicule Volkswagen Golf Diesel..."
+VEHICULE8=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Volkswagen",
+        "modele": "Golf",
+        "carburant": "Diesel",
+        "prix_par_jour": 420.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1530675706010-bc677ce30ab6?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }')
+ID_VEHICULE8=$(extract_id "$VEHICULE8" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE8"
+
+# Véhicule 9 - Renault Kadjar Diesel
+echo "  → Création du véhicule Renault Kadjar Diesel..."
+VEHICULE9=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Renault",
+        "modele": "Kadjar",
+        "carburant": "Diesel",
+        "prix_par_jour": 480.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&auto=format&fit=crop&q=80"
+    }')
+ID_VEHICULE9=$(extract_id "$VEHICULE9" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE9"
+
+# ── Véhicules supplémentaires : Électrique ───────────────────────────────────
+
+# Véhicule 10 - Renault Zoé Électrique
+echo "  → Création du véhicule Renault Zoé Électrique..."
+VEHICULE10=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Renault",
+        "modele": "Zoé",
+        "carburant": "Électrique",
+        "prix_par_jour": 390.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&auto=format&fit=crop&q=80"
+    }')
+ID_VEHICULE10=$(extract_id "$VEHICULE10" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE10"
+
+# Véhicule 11 - Nissan Leaf Électrique
+echo "  → Création du véhicule Nissan Leaf Électrique..."
+VEHICULE11=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Nissan",
+        "modele": "Leaf",
+        "carburant": "Électrique",
+        "prix_par_jour": 430.0,
+        "status": "disponible",
+        "img": "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=800"
+    }')
+ID_VEHICULE11=$(extract_id "$VEHICULE11" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE11"
+
+# ── Véhicules supplémentaires : Hybride ──────────────────────────────────────
+
+# Véhicule 12 - Toyota Yaris Cross Hybride
+echo "  → Création du véhicule Toyota Yaris Cross Hybride..."
+VEHICULE12=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Toyota",
+        "modele": "Yaris Cross",
+        "carburant": "Hybride",
+        "prix_par_jour": 500.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=800&auto=format&fit=crop&q=80"
+    }')
+ID_VEHICULE12=$(extract_id "$VEHICULE12" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE12"
+
+# Véhicule 13 - Renault Clio E-Tech Hybride
+echo "  → Création du véhicule Renault Clio E-Tech Hybride..."
+VEHICULE13=$(curl -s -X POST "$API_URL/api/vehicules/" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "marque": "Renault",
+        "modele": "Clio E-Tech",
+        "carburant": "Hybride",
+        "prix_par_jour": 400.0,
+        "status": "disponible",
+        "img": "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=800&auto=format&fit=crop&q=80"
+    }')
+ID_VEHICULE13=$(extract_id "$VEHICULE13" "id_vehicule")
+echo -e "  ${GREEN}✓${NC} Véhicule créé: $ID_VEHICULE13"
 
 # ============================================
 # 4. CRÉATION DES RÉSERVATIONS
@@ -509,7 +637,11 @@ echo ""
 echo "📊 Résumé des enregistrements créés :"
 echo "  • Utilisateurs : 5 (2 admins + 3 agents)"
 echo "  • Clients : 5"
-echo "  • Véhicules : 5"
+echo "  • Véhicules : 13"
+echo "    - Essence    : 3  (Renault Clio 5, Peugeot 208, Dacia Sandero)"
+echo "    - Diesel     : 4  (Dacia Logan, Peugeot 208, Volkswagen Golf, Renault Kadjar)"
+echo "    - Électrique : 2  (Renault Zoé, Nissan Leaf)"
+echo "    - Hybride    : 3  (Toyota Corolla, Toyota Yaris Cross, Renault Clio E-Tech)"
 echo "  • Réservations : 5"
 echo "  • Paiements : 5"
 echo "  • Retours : 5"

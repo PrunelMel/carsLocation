@@ -4,12 +4,12 @@ import Footer from '../components/HomeFooter'
 function ClientLayout() {
 
   return (
-    <div className="min-h-screen w-full bg-slate-500 flex flex-col overflow-x-hidden">
-      <NavBar />
-      <main className="flex-1 pt-20">
+    <div className='bg-gray-100 min-h-screen'>
+      {<NavBar />}
+      <main className="flex-1 pt-32 md:pt-16">
         <Outlet />
       </main>
-      <Footer />
+      { <Footer />}
     </div>
   )
 }

@@ -93,7 +93,7 @@ const login = async (endpoint, data) => {
                 throw new Error(erreur.detail);
         }
        
-        return await response.json()  
+        return  response 
     } catch (error) {
         console.error(error)
         throw error

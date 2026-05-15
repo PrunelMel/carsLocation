@@ -78,7 +78,7 @@ function Board() {
         fetchData()
     }, [])
     return (
-        <div className='bg-gray-100 min-h-screen'>
+        <div className='bg-gray-100 min-h-screen pt-12  max-sm:pt-32 sm:pt-24 md:pt-20 '>
             <Navbar></Navbar>
             <div className='p-5'>
                 <h1 className='text-2xl'>

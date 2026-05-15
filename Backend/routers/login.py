@@ -49,4 +49,4 @@ def login(request: schemas.UserLogin | schemas.ClientLogin, db: Session = Depend
                 detail="Mot de passe incorrect"
             )
 
-        return {"detail": "Client valide", "id": client.id_client}
+        return {"detail": "Client valide", "id": client.id_client,"nom" :client.nom }
