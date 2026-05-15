@@ -43,7 +43,7 @@ function App() {
       <Route path="/home" element={<ClientLayout />}>
         <Route index element={<Home />} />
         <Route path="cars" element={<CarListing />}></Route>
-        <Route path='login' element={<ClientLogin />}></Route>
+        <Route path='loginclient' element={<ClientLogin />}></Route>
         <Route path='mesReservations' element={<Reservation />}></Route>
       </Route>
       <Route path="/login" element={<Login />} />
@@ -64,7 +64,7 @@ function App() {
       </Route>
 
       {/* Fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );
 }

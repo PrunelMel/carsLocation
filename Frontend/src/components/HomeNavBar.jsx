@@ -58,7 +58,7 @@ const NavBar = () => {
               </button>
 
               <a
-                href="/loginclient"
+                href="/home/loginclient"
                 className="signup-btn bg-blue-600 text-white rounded-full px-5 py-2 text-sm font-semibold transition-shadow"
               >
                 Login
