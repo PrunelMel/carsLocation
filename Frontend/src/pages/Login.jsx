@@ -47,7 +47,8 @@ function Login() {
   }
 
   return (
-    <div className='h-screen bg-gray-100 flex justify-center items-center'>
+    <div className='h-screen bg-gray-100 flex flex-col justify-center items-center'>
+      <a href="/home" className=' text-gray-500 pb-5'>Retourner à l'accueil</a>
       <form
         className='bg-white rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.15)] w-full max-w-md p-10'
         onSubmit={handleSubmit}
