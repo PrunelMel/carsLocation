@@ -1,4 +1,3 @@
-// components/AgentModal.jsx
 function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, saving, erreur, succes }) {
   if (!isOpen) return null
 
@@ -22,7 +21,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
               <input
                 type='text'
                 required
-                placeholder='Dupont'
+                placeholder=''
                 value={agent.id_agent}
                 onChange={e => onChange({ ...agent, id_user: e.target.value })}
               
@@ -33,7 +32,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
               <input
                 type='text'
                 required
-                placeholder='Dupont'
+                placeholder='Saississez le nom'
                 value={agent.nom}
                 onChange={e => onChange({ ...agent, nom: e.target.value })}
                 className='w-full h-10 border border-gray-300 rounded px-3 mt-1 '
@@ -44,7 +43,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
               <input
                 type='text'
                 required
-                placeholder='Jean'
+                placeholder='Saississez le prénom'
                 value={agent.prenom}
                 onChange={e => onChange({ ...agent, prenom: e.target.value })}
                 className='w-full h-10 border border-gray-300 rounded px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400'
@@ -59,7 +58,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
             <input
               type='email'
               required
-              placeholder='jean.dupont@example.com'
+              placeholder='example@gmail.com'
               value={agent.email}
               onChange={e => onChange({ ...agent, email: e.target.value })}
               className='w-full h-10 border border-gray-300 rounded px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400'
@@ -73,7 +72,7 @@ function AgentModal({ isOpen, onClose, modeEdition, agent, onChange, onSubmit, s
             <input
               type='password'
               required={!modeEdition}
-              placeholder={modeEdition && '••••••••'}
+              placeholder={modeEdition ? '******':"Entrez votre mot de passe"}
               value={agent.mot_de_passe}
               onChange={e => onChange({ ...agent, mot_de_passe: e.target.value })}
               className='w-full h-10 border border-gray-300 rounded px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400'

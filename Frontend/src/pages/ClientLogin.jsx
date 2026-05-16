@@ -76,7 +76,7 @@ const LoginPage = () => {
             </button>
           </div>
 
-          {/* Feedback */}
+          {/* Message de Reponse succes ou echec  */}
           {error && (
             <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
               {error}

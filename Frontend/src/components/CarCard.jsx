@@ -7,9 +7,6 @@ import {
 import { StarIcon, GearIcon, HeartIcon, BoltIcon } from "./icons/icons";
 import { apiService } from "../services/api";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modal Détails
-// ─────────────────────────────────────────────────────────────────────────────
 
 const STATUS_STYLE = {
   disponible:  { label: "Disponible",   cls: "bg-emerald-100 text-emerald-700" },
@@ -18,13 +15,13 @@ const STATUS_STYLE = {
 };
 
 function DetailsModal({ car, onClose, onReserver }) {
-  const st = STATUS_STYLE[car.status] ?? { label: car.status, cls: "bg-gray-100 text-gray-600" };
+  const st = STATUS_STYLE[car.status] 
   const disponible = car.status === "disponible";
 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
-      onClick={e => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={e => { if (e.target === e.currentTarget) onClose();{/*Juste pour le fun :) */} }}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 16 }}
@@ -41,14 +38,14 @@ function DetailsModal({ car, onClose, onReserver }) {
                 <Car size={48} className="text-slate-300" />
               </div>
           }
-          {/* Badge statut */}
+          {/* Badge statut sur l'image */}
           <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${st.cls}`}>
             {st.label}
           </span>
-          {/* Bouton fermer */}
+          {/* Bouton fermer(la croix)*/}
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors shadow-sm"
+            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:text-red-500  transition-colors shadow-sm"
           >
             <X size={16} />
           </button>
@@ -69,7 +66,7 @@ function DetailsModal({ car, onClose, onReserver }) {
             </div>
           </div>
 
-          {/* Specs */}
+          {/* Informations du vehicule du vehicule */}
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-slate-50 rounded-xl p-3 flex items-center gap-2">
               <Fuel size={16} className="text-blue-500 shrink-0" />
@@ -112,7 +109,8 @@ function DetailsModal({ car, onClose, onReserver }) {
               Fermer
             </button>
             <button
-              onClick={() => { onClose(); onReserver(); }}
+              onClick={() => {//onClose ferme d'abord la carte detail
+                 onClose();onReserver(); }}
               disabled={!disponible}
               className={`flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
                 disponible
@@ -130,9 +128,6 @@ function DetailsModal({ car, onClose, onReserver }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Modal Réservation
-// ─────────────────────────────────────────────────────────────────────────────
 
 function ReservationModal({ car, onClose }) {
   const idClient = localStorage.getItem("idClient");
@@ -301,12 +296,8 @@ function ReservationModal({ car, onClose }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// CarCard
-// ─────────────────────────────────────────────────────────────────────────────
 
 function CarCard({ car, index }) {
-  const [liked,        setLiked]        = useState(false);
   const [showDetails,  setShowDetails]  = useState(false);
   const [showReserver, setShowReserver] = useState(false);
 
@@ -336,13 +327,7 @@ function CarCard({ car, index }) {
             <span className={`w-1.5 h-1.5 rounded-full ${disponible ? "bg-white" : "bg-gray-300"}`} />
             {disponible ? "Disponible" : "Indisponible"}
           </div>
-          <motion.button
-            whileTap={{ scale: 0.85 }}
-            onClick={() => setLiked(l => !l)}
-            className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-500 hover:text-red-500 transition-colors shadow-sm"
-          >
-            <HeartIcon filled={liked} />
-          </motion.button>
+          
         </div>
 
         {/* Body */}
@@ -351,7 +336,7 @@ function CarCard({ car, index }) {
             <h3 className="text-slate-900 font-bold text-[15.5px] leading-tight tracking-tight">
               {car.marque} {car.modele}
             </h3>
-            <StarIcon />
+            
           </div>
           <div className="flex items-baseline gap-1">
             <span className="text-blue-600 font-bold text-[22px] tracking-tight">{car.prix_par_jour}</span>
@@ -373,7 +358,7 @@ function CarCard({ car, index }) {
           <div className="flex gap-2 mt-auto pt-1">
             <motion.button
               whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
+              
               onClick={() => setShowDetails(true)}
               className="flex-1 py-2.5 rounded-xl border border-gray-200 text-slate-700 text-[13px] font-semibold hover:border-blue-200 hover:text-blue-600 hover:bg-blue-50 transition-all"
             >

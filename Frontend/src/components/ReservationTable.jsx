@@ -1,4 +1,3 @@
-// components/ReservationTable.jsx
 import { STATUS_COLORS, STATUS_LABELS } from './ReservationFilters'
 
 function ReservationTable({ reservations, onEdit, onDelete }) {

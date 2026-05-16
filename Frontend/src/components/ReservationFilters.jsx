@@ -1,4 +1,3 @@
-// components/ReservationFilters.jsx
 export const STATUS_COLORS = {
   en_attente: 'bg-blue-100 text-blue-700',
   confirmee: 'bg-emerald-100 text-emerald-700',

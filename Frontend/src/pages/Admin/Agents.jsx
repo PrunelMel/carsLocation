@@ -82,7 +82,7 @@ function Agents() {
     setErreur('')
     setSucces('')
 
-    // Validations simples
+    // Validations simples sur le nom le prenom et l'email
     if (!agentEnCours.nom.trim() || !agentEnCours.prenom.trim() || !agentEnCours.email.trim()) {
       setErreur('Nom, prénom et email sont obligatoires.')
       return
@@ -107,7 +107,6 @@ function Agents() {
         await apiService.updateUtilisateur(idEdition, agentEnCours)
         setSucces('Agent mis à jour avec succès !')
       } else {
-        // Pour la création, on exclut id_user car il est généré par le backend
         const {id_user, ...createPayload } = agentEnCours
         await apiService.createUtilisateur(createPayload)
         setSucces('Agent ajouté avec succès !')

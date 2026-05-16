@@ -1,4 +1,3 @@
-// components/ReservationEditModal.jsx
 function ReservationEditModal({
   reservation,
   formModif,

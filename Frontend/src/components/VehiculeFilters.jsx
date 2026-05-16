@@ -1,4 +1,3 @@
-// components/VehiculeFilters.jsx
 function VehiculeFilters({ vehicules, filter, onFilterChange }) {
   const count = (s) => vehicules.filter(v => v.status === s).length
 

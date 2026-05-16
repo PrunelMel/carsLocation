@@ -16,7 +16,6 @@ export default function CarListing() {
   const [showOnly, setShowOnly]         = useState("all");     // disponibilité
   const [sortBy, setSortBy]             = useState("default"); // tri prix
 
-  // ── Fetch ────────────────────────────────────────────────────────────────
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,25 +30,24 @@ export default function CarListing() {
     fetchData();
   }, []);
 
-  // ── Logique de filtrage + tri (mémoïsée) ─────────────────────────────────
   const filtered = useMemo(() => {
     let result = [...cars];
 
-    // 1. Filtre carburant
+    // Filtre carburant
     if (activeFilter !== "Tous") {
       result = result.filter(
         c => c.carburant?.toLowerCase() === activeFilter.toLowerCase()
       );
     }
 
-    // 2. Filtre disponibilité
+    // Filtre disponibilité
     if (showOnly === "available") {
       result = result.filter(c => c.status === "disponible");
     } else if (showOnly === "unavailable") {
       result = result.filter(c => c.status !== "disponible");
     }
 
-    // 3. Tri
+    //  Tri
     if (sortBy === "price-asc")  result.sort((a, b) => a.prix_par_jour - b.prix_par_jour);
     if (sortBy === "price-desc") result.sort((a, b) => b.prix_par_jour - a.prix_par_jour);
 
@@ -91,7 +89,7 @@ export default function CarListing() {
           </p>
         </motion.div>
 
-        {/* ── Controls ── */}
+        {/* Controls  */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

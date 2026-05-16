@@ -1,4 +1,3 @@
-// components/AgentCard.jsx
 function AgentCard({ agent, onEdit, onDelete }) {
   const initiales = `${agent.prenom?.[0] ?? ''}${agent.nom?.[0] ?? ''}`.toUpperCase()
 

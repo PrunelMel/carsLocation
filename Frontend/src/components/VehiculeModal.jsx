@@ -1,4 +1,3 @@
-// components/VehiculeModal.jsx
 function VehiculeModal({
   isOpen,
   onClose,

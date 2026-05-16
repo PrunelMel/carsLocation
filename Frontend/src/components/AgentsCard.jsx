@@ -1,7 +1,7 @@
 function AgentCard({ nom = '', prenom = '', email = '' }) {
   return (
     <div className='flex items-center gap-3 bg-white rounded-xl p-3 shadow-sm'>
-      <svg viewBox='0 0 100 100' className='h-10 w-10 flex-shrink-0'>
+      <svg viewBox='0 0 100 100' className='h-10 w-10 shrink-0'>
         <circle cx={50} cy={50} r={45} fill='#dbeafe' />
         <text
           x="50" y="50"

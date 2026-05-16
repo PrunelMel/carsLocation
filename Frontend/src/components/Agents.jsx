@@ -55,7 +55,6 @@ function Agents() {
         }
 
         try {
-            // L'API PUT /users/{id} attend un UtilisateurCreate complet
             const payload = {
                 id_user: agentAModifier.id_user,
                 nom: formModif.nom,
@@ -67,13 +66,13 @@ function Agents() {
             }
             await apiService.updateUtilisateur(agentAModifier.id_user, payload)
             setSuccesModif("Agent mis à jour avec succès !")
-            // Mettre à jour la liste locale
+            // Mise à jour de la liste locale
             setAgents(prev => prev.map(a =>
                 a.id_user === agentAModifier.id_user
                     ? { ...a, nom: formModif.nom, prenom: formModif.prenom, email: formModif.email, role: formModif.role }
                     : a
             ))
-            setTimeout(() => setAgentAModifier(null), 800)
+            setTimeout(() => setAgentAModifier(null), 500)
         } catch (e) {
             setErreurModif("Erreur lors de la mise à jour : " + e.message)
         }
@@ -175,7 +174,7 @@ function Agents() {
 
                             <div className='flex justify-end gap-3 mt-3'>
                                 <button
-                                    onClick={() => setAgentAModifier(null)}
+
                                     className='px-5 py-2 rounded border border-gray-300 text-gray-600 hover:bg-gray-100 hover:cursor-pointer'
                                 >
                                     Annuler
